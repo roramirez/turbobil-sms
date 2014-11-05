@@ -5,7 +5,6 @@ class Admin < ActiveRecord::Base
          :rememberable, :trackable, :validatable
   self.table_name = 'admin'
 
-  has_many :accounts
   has_many :calls
   has_many :price_customers
   has_many :routes

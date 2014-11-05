@@ -1,20 +1,6 @@
 class CreateDatabase < ActiveRecord::Migration
   def up
 
-    create_table :account, force: true do |t|
-      t.text :code
-      t.references :admin
-      t.references :customer
-      t.integer :status
-      t.text :ip_auth
-      t.text :password
-    end
-
-    create_table :account_codec, force: true do |t|
-      t.references :account
-      t.references :codec
-    end
-
     create_table :admin, force: true do |t|
       t.text :name
       t.string :email, null: false, :limit => 320
@@ -34,11 +20,6 @@ class CreateDatabase < ActiveRecord::Migration
       t.references :price_customer
       t.references :currency
       t.text :dialstatus
-    end
-
-    create_table :codec, force: true do |t|
-      t.text :name
-      t.text :code
     end
 
     create_table :currency, force: true do |t|
@@ -81,12 +62,6 @@ class CreateDatabase < ActiveRecord::Migration
       t.text :username
       t.text :password
       t.references :protocol
-    end
-
-    create_table :provider_codec, force: true do |t|
-      t.references :provider
-      t.references :codec
-      t.integer :priority
     end
 
     create_table :rate, force: true do |t|

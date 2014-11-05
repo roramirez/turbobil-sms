@@ -2,7 +2,7 @@ ActiveAdmin.register Provider do
 
   scope_to :current_admin
 
-  permit_params :name, :email, :balance,  :host, :username, :password, codec_ids: []
+  permit_params :name, :email, :balance,  :host, :username, :password
 
   filter :type_customer
 
@@ -31,7 +31,6 @@ ActiveAdmin.register Provider do
       f.input :host,         :as => :string
       f.input :username,     :as => :string
       f.input :password,     :as => :password
-      f.input :codecs,       :as => :check_boxes
     end
     f.actions
   end
@@ -41,11 +40,6 @@ ActiveAdmin.register Provider do
       row :email
       row :balance
 
-      table_for provider.codecs do
-        column "Codecs" do |codec|
-          codec.name
-        end
-      end
 
     end
     panel "Connection" do
