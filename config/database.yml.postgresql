@@ -1,9 +1,9 @@
 production:
   adapter: postgresql
   encoding: unicode
-  database: turbobil
+  database: turbobil_sms_sms
   pool: 8
-  username: turbobil
+  username: turbobil_sms
   password:
   host: localhost
   port: 5432
@@ -12,9 +12,9 @@ production:
 development:
   adapter: postgresql
   encoding: unicode
-  database: turbobil_dev
+  database: turbobil_sms_dev
   pool: 8
-  username: turbobil
+  username: turbobil_sms
   password:
   host: localhost
   port: 5432
@@ -23,9 +23,9 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: turbobil_test
+  database: turbobil_sms_test
   pool: 8
-  username: turbobil
+  username: turbobil_sms
   password:
   host: localhost
   port: 5432
