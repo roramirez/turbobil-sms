@@ -1,7 +1,7 @@
 production:
   adapter: postgresql
   encoding: unicode
-  database: turbobil_sms_sms
+  database: turbobil_sms
   pool: 8
   username: turbobil_sms
   password:
@@ -12,7 +12,7 @@ production:
 development:
   adapter: postgresql
   encoding: unicode
-  database: turbobil_sms_dev
+  database: turbobil_sms_development
   pool: 8
   username: turbobil_sms
   password:
