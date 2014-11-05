@@ -6,12 +6,6 @@ ActiveAdmin.register Provider do
 
   filter :type_customer
 
-  controller do
-    after_save do |provider|
-      call_rake  :provider_sip, :id => provider.id
-    end
-  end
-
   sidebar "Details", only: [:show, :edit] do
     ul do
       li link_to("Routes", admins_provider_rates_path(provider))
