@@ -9,7 +9,7 @@ ActiveAdmin.register Customer, namespace: :admins do
 
   sidebar "Details", only: [:show, :edit] do
     ul do
-      li link_to("Accounts", admins_customer_accounts_path(customer))
+      #add link to sidebar
     end
   end
 
