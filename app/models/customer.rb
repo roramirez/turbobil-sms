@@ -13,6 +13,8 @@ class Customer < ActiveRecord::Base
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
   has_many :calls
+  has_many :campaigns
+  has_many :lists
 
   belongs_to :customer
   belongs_to :currency

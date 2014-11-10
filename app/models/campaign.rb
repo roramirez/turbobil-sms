@@ -1,4 +1,8 @@
 class Campaign < ActiveRecord::Base
-  belongs_to :customer
+  self.table_name = 'campaign'
+
+
   belongs_to :list
+  belongs_to :customer
+
 end
