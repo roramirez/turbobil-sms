@@ -1,6 +1,7 @@
 $(function() {
 
     $('#side-menu').metisMenu();
+    jQuery('.datetimepicker').datetimepicker();
 
 });
 

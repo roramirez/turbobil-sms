@@ -1,8 +1,9 @@
 class CreateCampaigns < ActiveRecord::Migration
   def change
     create_table :campaign do |t|
+      t.string :name
       t.integer :status
-      t.string :text
+      t.text :text
       t.timestamp :init
       t.references :customer, index: true
       t.references :list, index: true

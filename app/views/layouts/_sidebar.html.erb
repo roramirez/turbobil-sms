@@ -14,6 +14,9 @@
         <a class="<%= 'active' if current_page?(customer_path) %>" href="<%= url_for :controller => 'customer', :action => 'dashboard' %>"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
       </li>
       <li>
+        <a class="<%= 'active' if current_page?(campaigns_path) %>" href="<%= url_for :controller => 'campaigns', :action => 'index' %>"><i class="fa fa-phone fa-fw"></i>Campaigns</a>
+      </li>
+      <li>
         <a class="<%= 'active' if current_page?(customer_calls_path) %>" href="<%= url_for :controller => 'customer', :action => 'calls' %>"><i class="fa fa-phone fa-fw"></i>Calls</a>
       </li>
       <li>

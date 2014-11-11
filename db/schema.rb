@@ -54,8 +54,9 @@ ActiveRecord::Schema.define(version: 20141106020547) do
   add_index "call", ["at", "customer_id"], name: "idx_at_customer_on_call", using: :btree
 
   create_table "campaign", force: true do |t|
+    t.string   "name"
     t.integer  "status"
-    t.string   "text"
+    t.text   "text"
     t.datetime "init"
     t.integer  "customer_id"
     t.integer  "list_id"

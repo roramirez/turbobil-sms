@@ -16,4 +16,9 @@ Rails.application.routes.draw do
   get "/customer" => "customer#dashboard"
   get '/customer/profile' =>  'customer#profile', as: :customer_profile
   post '/customer/profile' =>  'customer#update_profile', as: :customer_update_profile
+
+
+  resources :campaigns, path: "/customer/campaigns"
+
 end
+
