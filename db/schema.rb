@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106020547) do
+ActiveRecord::Schema.define(version: 20141112010214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,18 +54,27 @@ ActiveRecord::Schema.define(version: 20141106020547) do
   add_index "call", ["at", "customer_id"], name: "idx_at_customer_on_call", using: :btree
 
   create_table "campaign", force: true do |t|
-    t.string   "name"
     t.integer  "status"
-    t.text   "text"
+    t.text     "text"
     t.datetime "init"
     t.integer  "customer_id"
     t.integer  "list_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   add_index "campaign", ["customer_id"], name: "index_campaign_on_customer_id", using: :btree
   add_index "campaign", ["list_id"], name: "index_campaign_on_list_id", using: :btree
+
+  create_table "column_list", force: true do |t|
+    t.string   "name"
+    t.integer  "list_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "column_list", ["list_id"], name: "index_column_list_on_list_id", using: :btree
 
   create_table "contact", force: true do |t|
     t.string   "number"
