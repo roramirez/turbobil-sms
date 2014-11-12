@@ -1,0 +1,33 @@
+<%= simple_form_for(@list) do |f| %>
+  <% if @list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@list.errors.count, "error") %> prohibited this list from being saved:</h2>
+
+      <ul>
+      <% @list.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row col-lg-10">
+
+    <div class="form-group col-sm-8">
+      <label>Name</label>
+      <%= f.text_field :name, autofocus: true, class: 'form-control', as: 'string' %>
+    </div>
+
+    <div class="form-group col-sm-4">
+    </div>
+
+  </div>
+
+  <div class="row col-sm-10">
+    <div class="pull-right">
+      <%= f.button :submit, class: "form-submit" %>
+    <div>
+  </div
+
+
+<% end %>
