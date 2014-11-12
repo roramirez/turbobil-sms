@@ -8,6 +8,8 @@ class ListsController < ApplicationController
   # GET /lists.json
   def index
     @lists = current_customer.lists
+                              .page(params[:page]).per(10)
+                              .sorted(params[:sort])
   end
 
   # GET /lists/1

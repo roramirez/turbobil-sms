@@ -17,15 +17,17 @@
       <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover" id="dataTable">
           <thead>
-            <tr>
-              <th colspan="3"></th>
+            <tr role="row">
+              <th><%=  link_to_sorted "Name", :name %></th>
+              <th><%=  "Operation"  %></th>
             </tr>
           </thead>
 
           <tbody>
+            <tr class="odd gradeX">
             <% @lists.each do |list| %>
-            <tr>
-              <td><%= link_to 'Edit', edit_campaign_path(list) %></td>
+              <td><%= list.name %></td>
+              <td><%= link_to 'Edit', edit_list_path(list) %></td>
             </tr>
             <% end %>
          </tbody>
@@ -35,6 +37,6 @@
 </div>
 <div class="row">
   <div class="col-sm-12">
-    <%#= paginate @campaigns, theme:"turbobil" %>
+    <%= paginate @lists, theme:"turbobil" %>
    </div>
 </div>

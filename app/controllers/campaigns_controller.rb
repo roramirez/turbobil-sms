@@ -8,6 +8,8 @@ class CampaignsController < ApplicationController
   # GET /campaigns.json
   def index
     @campaigns = current_customer.campaigns
+                              .page(params[:page]).per(10)
+                              .sorted(params[:sort])
   end
 
   # GET /campaigns/1
