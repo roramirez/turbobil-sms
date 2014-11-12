@@ -28,6 +28,8 @@ class ListsController < ApplicationController
   # POST /lists.json
   def create
     @list = List.new(list_params)
+    default_column @list
+
     current_customer.lists << @list
 
     respond_to do |format|
@@ -69,6 +71,17 @@ class ListsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_list
       @list = current_customer.lists.find(params[:id])
+    end
+
+    def default_column list
+    # add default column
+      columns = [:Name, :Number]
+      columns.each do |n|
+        c = ColumnList.new
+        c.name = n
+        c.list = list
+        c.save
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
