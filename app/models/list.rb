@@ -5,4 +5,7 @@ class List < ActiveRecord::Base
   has_many :campaigns
   belongs_to :customer
 
+  def to_s
+    :name
+  end
 end
