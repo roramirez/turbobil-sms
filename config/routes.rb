@@ -26,7 +26,6 @@ Rails.application.routes.draw do
       get 'import'
       post 'import'
     end
-
   end
 
 end
