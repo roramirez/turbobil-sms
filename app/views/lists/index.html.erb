@@ -27,7 +27,10 @@
             <tr class="odd gradeX">
             <% @lists.each do |list| %>
               <td><%= list.name %></td>
-              <td><%= link_to 'Edit', edit_list_path(list) %></td>
+              <td>
+                 <%= link_to 'Edit', edit_list_path(list) %> |
+                 <%= link_to 'Import', import_list_path(list) %>
+              </td>
             </tr>
             <% end %>
          </tbody>

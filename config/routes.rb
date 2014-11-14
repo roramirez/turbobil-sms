@@ -18,8 +18,16 @@ Rails.application.routes.draw do
   post '/customer/profile' =>  'customer#update_profile', as: :customer_update_profile
 
 
-  resources :campaigns, path: "/customer/campaigns"
-  resources :lists, path: "/customer/lists"
+  resources :campaigns, path: "/customer/campaigns" 
+  resources :lists, path: "/customer/lists" do
+    resources :contact
+
+    member do
+      get 'import'
+      post 'import'
+    end
+
+  end
 
 end
 
