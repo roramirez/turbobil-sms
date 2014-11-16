@@ -10,18 +10,24 @@ class List < ActiveRecord::Base
   end
 
 
-  def self.import(file)
+  def import(file, key=nil)
     spreadsheet = open_spreadsheet(file)
-    header = spreadsheet.row(1)
-    (2..spreadsheet.last_row).each do |i|
-      row = Hash[[header, spreadsheet.row(i)].transpose]
-      contact = Contact.find_by_id(row["id"]) || Contact.new
-      contact.attributes = row.to_hash.slice(*row.to_hash.keys)
-      contact.save!
+    if !key
+      key = SecureRandom.hex(64)
     end
+    (1..spreadsheet.last_row).each do |i|
+      row = spreadsheet.row(i)
+      tmp_contact_list = TmpContactList.new
+      tmp_contact_list.content = row.to_json
+      tmp_contact_list.key = key
+      tmp_contact_list.list_id = id
+      tmp_contact_list.save!
+    end
+    key
   end
 
-  def self.open_spreadsheet(file)
+  private
+  def open_spreadsheet(file)
     case File.extname(file.original_filename)
       when ".csv" then Roo::Csv.new(file.path, nil, :ignore)
       when ".xls" then Roo::Excel.new(file.path, nil, :ignore)

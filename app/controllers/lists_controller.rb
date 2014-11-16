@@ -2,7 +2,7 @@ class ListsController < ApplicationController
 
   layout "customer"
   before_filter :authenticate_customer!
-  before_action :set_list, only: [:show, :edit, :update, :destroy, :import]
+  before_action :set_list, only: [:show, :edit, :update, :destroy, :import, :upload]
 
   # GET /lists
   # GET /lists.json
@@ -75,7 +75,8 @@ class ListsController < ApplicationController
   end
 
   def upload
-    List.import(params[:file])
+    key = SecureRandom.hex(64)
+    @list.import(params[:file], key)
     redirect_to lists_path, notice: 'Upload contacts'
   end
 

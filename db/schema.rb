@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112010214) do
+ActiveRecord::Schema.define(version: 20141116162212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -171,6 +171,16 @@ ActiveRecord::Schema.define(version: 20141112010214) do
     t.integer "admin_id"
     t.float   "price_list"
   end
+
+  create_table "tmp_contact_list", force: true do |t|
+    t.text     "key"
+    t.json     "content"
+    t.integer  "list_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tmp_contact_list", ["list_id"], name: "index_tmp_contact_list_on_list_id", using: :btree
 
   create_table "type_customer", force: true do |t|
     t.text    "name"
