@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
     member do
       get 'import'
-      post 'import'
+      post 'upload'
     end
   end
 

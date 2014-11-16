@@ -74,6 +74,11 @@ class ListsController < ApplicationController
   def import
   end
 
+  def upload
+    List.import(params[:file])
+    redirect_to lists_path, notice: 'Upload contacts'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_list
