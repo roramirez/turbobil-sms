@@ -77,7 +77,11 @@ class ListsController < ApplicationController
   def upload
     key = SecureRandom.hex(64)
     @list.import(params[:file], key)
-    redirect_to lists_path, notice: 'Upload contacts'
+    @temp_contacts = TmpContactList.get_by_key_and_list(key, @list)
+  end
+
+  def import_map
+
   end
 
   private
