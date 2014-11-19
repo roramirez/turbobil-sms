@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       get 'import'
       post 'upload'
     end
+
+    resources :column_lists
   end
 
 end

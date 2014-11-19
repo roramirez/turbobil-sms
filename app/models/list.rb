@@ -3,6 +3,7 @@ class List < ActiveRecord::Base
 
 
   has_many :campaigns
+  has_many :column_list
   belongs_to :customer
 
   def to_s
