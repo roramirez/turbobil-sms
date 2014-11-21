@@ -18,8 +18,13 @@
             <% @temp_contacts[0].content.each_with_index do |c, i| %>
               <th>
                 <div class="form-group">
-                  <label>New Column Name</label>
-                  <input id="newcol-<%= i %>" class="form-control" value="" maxlength="50" type="text">
+                  <div id="f_newcol<%= i %>">
+                    <label>New Column Name</label>
+                    <%= form_for [@list, ColumnList.new] , remote: true do |f| %>
+                      <input id="newcol-<%= i %>" class="form-control" value="" maxlength="50" type="text" name="column_list[name]">
+                      <input id="submit-newcol-<%= i %>" class="btn btn-default" vaname="submit-newcol-<%= i%>" type="submit" value="Save">
+                    <% end %>
+                  </div>
                 </div>
                 <div class="form-group">
                 <select id="sel_col_<%= i %>" class="form-control" >
