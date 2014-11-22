@@ -29,7 +29,7 @@
                 </span>
                 <div class="form-group">
                 <select id="sel_col_<%= i %>" class="form-control" data-id="<%= i %>" >
-                  <option selected="selected">Select option</option>
+                  <option value="0" selected="selected">Select option</option>
                   <option value="new">New column</option>
                   <optgroup label="Available Column Names">
                   <% @list.column_list.each do |col| %>
@@ -74,6 +74,7 @@
   $('input[name^="discard-newcol"]').on('click', function() {
     var id = $(this).data('id');
     $("span[id=f_newcol-" + id + "]").hide();
+    $('#sel_col_' + id ).val(0)
   });
 
   $("span[id*=f_newcol]").hide();
