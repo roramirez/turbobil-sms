@@ -31,7 +31,7 @@ class ColumnListsController < ApplicationController
     respond_to do |format|
       if @column_list.save
         format.html { redirect_to  list_column_lists_path(@list), notice: 'Column list was successfully created.' }
-        format.json { render :show, status: :created, location: @column_list }
+        format.json { render :show, status: :created, location:  list_column_list_path(@list, @column_list) }
       else
         format.html { render :new }
         format.json { render json: @column_list.errors, status: :unprocessable_entity }
@@ -45,7 +45,7 @@ class ColumnListsController < ApplicationController
     respond_to do |format|
       if @column_list.update(column_list_params)
         format.html { redirect_to  list_column_list_path(@column_list), notice: 'Column list was successfully updated.' }
-        format.json { render :show, status: :ok, location: @column_list }
+        format.json { render :show, status: :ok, location: list_column_list_path(@column_list) }
       else
         format.html { render :edit }
         format.json { render json: @column_list.errors, status: :unprocessable_entity }

@@ -20,7 +20,7 @@
                 <div class="form-group">
                   <div id="f_newcol<%= i %>">
                     <label>New Column Name</label>
-                    <%= form_for [@list, ColumnList.new] , remote: true do |f| %>
+                    <%= form_for [@list, ColumnList.new] , format: :json ,remote: true do |f| %>
                       <input id="newcol-<%= i %>" class="form-control" value="" maxlength="50" type="text" name="column_list[name]">
                       <input id="submit-newcol-<%= i %>" class="btn btn-default" vaname="submit-newcol-<%= i%>" type="submit" value="Save">
                     <% end %>
