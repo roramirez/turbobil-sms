@@ -63,6 +63,9 @@
      if (value == 'new') {
       $("span[id=f_newcol-" + id + "]").show();
       $("#newcol-" + id ).focus()
+     }else{
+      $("select[id^=sel_col] option[value=" + value + "]").attr('disabled','disabled')
+      $(this).find('option:selected').removeAttr('disabled');
      }
    });
 
