@@ -97,6 +97,9 @@ class ListsController < ApplicationController
         c = ColumnList.new
         c.name = n
         c.list = list
+        if n == :Number
+          c.key = true
+        end
         c.save
       end
     end
