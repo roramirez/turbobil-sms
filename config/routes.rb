@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
     member do
       get 'import'
+      post 'import_map'
       post 'upload'
     end
 
