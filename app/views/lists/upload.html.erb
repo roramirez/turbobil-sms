@@ -22,7 +22,8 @@
                     <label>New Column Name</label>
                     <%= form_for [@list, ColumnList.new] , format: :json ,remote: true do |f| %>
                       <input id="newcol-<%= i %>" class="form-control" value="" maxlength="50" type="text" name="column_list[name]">
-                      <input id="submit-newcol-<%= i %>" class="btn btn-default" vaname="submit-newcol-<%= i%>" type="submit" value="Save">
+                      <input id="submit-newcol-<%= i %>" class="btn btn-default" name="submit-newcol-<%= i%>" type="submit" value="Save">
+                      <input id="discard-newcol-<%= i %>" class="btn btn-default" name="discard-newcol-<%= i%>" data-id="<%= i %>" type="button" value="Discard">
                     <% end %>
                   </div>
                 </span>
@@ -64,10 +65,16 @@
       $("span[id=f_newcol-" + id + "]").show();
       $("#newcol-" + id ).focus()
      }else{
+      $("span[id=f_newcol-" + id + "]").hide();
       $("select[id^=sel_col] option[value=" + value + "]").attr('disabled','disabled')
       $(this).find('option:selected').removeAttr('disabled');
      }
    });
+
+  $('input[name^="discard-newcol"]').on('click', function() {
+    var id = $(this).data('id');
+    $("span[id=f_newcol-" + id + "]").hide();
+  });
 
   $("span[id*=f_newcol]").hide();
 </script>
