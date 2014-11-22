@@ -20,7 +20,7 @@
                 <span id="f_newcol-<%= i %>">
                   <div class="form-group">
                     <label>New Column Name</label>
-                    <%= form_for [@list, ColumnList.new] , format: :json ,remote: true do |f| %>
+                    <%= form_for [@list, ColumnList.new] , format: :json ,remote: true , html: {'data-id' => i}  do |f| %>
                       <input id="newcol-<%= i %>" class="form-control" value="" maxlength="50" type="text" name="column_list[name]">
                       <input id="submit-newcol-<%= i %>" class="btn btn-default" name="submit-newcol-<%= i%>" type="submit" value="Save">
                       <input id="discard-newcol-<%= i %>" class="btn btn-default" name="discard-newcol-<%= i%>" data-id="<%= i %>" type="button" value="Discard">
@@ -75,6 +75,16 @@
     var id = $(this).data('id');
     $("span[id=f_newcol-" + id + "]").hide();
     $('#sel_col_' + id ).val(0)
+  });
+
+  $('.new_column_list').bind('ajax:success', function(data, status, xhr){
+    var id = $(this).data('id');
+    var option = new Option(status.name, status.id);
+    $("select[id^=sel_col] optgroup").append(option);
+    $("span[id=f_newcol-" + id + "]").hide();
+    $("select[id^=sel_col] option[value=" + status.id + "]").attr('disabled','disabled');
+    $('#sel_col_' + id ).val(status.id)
+    $(this).find('option:selected').removeAttr('disabled');  
   });
 
   $("span[id*=f_newcol]").hide();
