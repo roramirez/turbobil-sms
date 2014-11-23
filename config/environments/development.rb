@@ -36,5 +36,5 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   #http://stackoverflow.com/a/18463187
-  config.reload_classes_only_on_change = false
+  #config.reload_classes_only_on_change = false
 end
