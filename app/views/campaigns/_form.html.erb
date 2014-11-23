@@ -53,6 +53,7 @@
 
 <% end %>
 
+<script src="/assets/jquery.textcomplete.min.js?body=1"></script>
 <script>
 
   var columns = '';
@@ -63,12 +64,29 @@
 
     var req = $.ajax({
       type: 'GET',
-      url: '/customer/lists/'  + value + '/column_lists.json',  
+      url: '/customer/lists/'  + value + '/column_lists.json',
     });
     req.done(function(data){
       columns = data;
+      words = [] 
+      $.each(columns, function (i, column) {
+       words.push(column.name)
+      });
     });
 
   }).change();
+
+  $('#campaign_text').textcomplete([{
+    match: /(^|\s)(\w{2,})$/,
+    search: function (term, callback) {
+      callback($.map(words, function (word) {
+        return word.indexOf(term) === 0 ? word : null;
+      }));
+    },
+    replace: function (word) {
+      return '$1:' + word + ': ';
+    }
+  }]);
+
 
 </script>
