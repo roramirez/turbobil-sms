@@ -3,7 +3,7 @@
      <h1 class="page-header">
        Import Contacts Lists
        <div class="pull-right">
-        <%= link_to 'Add to List',  import_map_list_path(@list), class: 'btn btn-default' %>
+        <%= link_to 'Add to List',  import_map_list_path(@list), class: 'btn btn-default import-data' %>
         </div>
      </h1>
   </div>
@@ -58,6 +58,9 @@
 </div>
 
 <script>
+  var columns_map = [];
+  var key = '<%= @key %>';
+  var key_map = <%= @list.column_list.key_map.id %>;
   $('select[id^="sel_col"]').on('change', function (e) {
     var value = $(this).val();
     var id = $(this).data('id');
@@ -67,6 +70,7 @@
      }else{
       $("span[id=f_newcol-" + id + "]").hide();
       $("select[id^=sel_col] option[value=" + value + "]").attr('disabled','disabled')
+      addColumn(id, value);
       $(this).find('option:selected').removeAttr('disabled');
      }
    });
@@ -84,8 +88,29 @@
     $("span[id=f_newcol-" + id + "]").hide();
     $("select[id^=sel_col] option[value=" + status.id + "]").attr('disabled','disabled');
     $('#sel_col_' + id ).val(status.id)
+    addColumn(id, status.id);
     $(this).find('option:selected').removeAttr('disabled');  
   });
 
   $("span[id*=f_newcol]").hide();
+  $('.import-data').addClass('disabled');
+
+  function addColumn(id, column) {
+    var value = parseInt(column);
+    columns_map[id] = value;
+
+    var enable = false;
+    $.each(columns_map,  function( index, value ) {
+      if (key_map == value) {
+        enable = true;
+      }
+    });
+
+    if (enable) {
+      $('.import-data').removeClass('disabled');
+    }else{
+      $('.import-data').addClass('disabled');
+    }
+  }
+
 </script>
