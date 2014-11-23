@@ -13,6 +13,7 @@
 
   <div class="row col-lg-10">
 
+    <%= f.hidden_field :id %>
     <div class="form-group col-sm-8">
       <label>Name</label>
       <%= f.text_field :name, autofocus: true, class: 'form-control', as: 'string' %>
@@ -51,3 +52,41 @@
   </div
 
 <% end %>
+
+<script src="/assets/jquery.textcomplete.min.js?body=1"></script>
+<script>
+
+  var columns = '';
+
+  $('#campaign_list_id').on('change', function (e) {
+    var campaign_id = $('#campaign_id').val();
+    var value = $(this).val();
+
+    var req = $.ajax({
+      type: 'GET',
+      url: '/customer/lists/'  + value + '/column_lists.json',
+    });
+    req.done(function(data){
+      columns = data;
+      words = [] 
+      $.each(columns, function (i, column) {
+       words.push(column.name)
+      });
+    });
+
+  }).change();
+
+  $('#campaign_text').textcomplete([{
+    match: /(^|\s)(\w{2,})$/,
+    search: function (term, callback) {
+      callback($.map(words, function (word) {
+        return word.indexOf(term) === 0 ? word : null;
+      }));
+    },
+    replace: function (word) {
+      return '$1:' + word + ': ';
+    }
+  }]);
+
+
+</script>
