@@ -75,6 +75,7 @@ GEM
       railties (>= 3.2, < 5.0)
     formtastic (2.3.0.rc3)
       actionpack (>= 3.0)
+    global_phone (1.0.1)
     has_scope (0.6.0.rc)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
@@ -212,6 +213,7 @@ DEPENDENCIES
   devise
   fancybox2-rails (~> 0.2.8)
   font-awesome-rails (~> 4.1)
+  global_phone
   inifile (~> 3.0.0)
   jbuilder (~> 2.0)
   jquery-datetimepicker-rails
