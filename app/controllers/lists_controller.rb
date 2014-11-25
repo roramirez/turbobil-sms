@@ -101,7 +101,12 @@ class ListsController < ApplicationController
       h = columns_map.each_with_index.map { |x,i| [x, tmp.content[i]] }
       hash_data = Hash[h]
       contact.data = hash_data
-      contact.save
+
+      exists = Contact.exist_number_on_list(contact.number.to_s, @list)
+      if exists == false
+        contact.save
+      end
+
     end
 
     render :import_map, status: :ok, location: @list
