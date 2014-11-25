@@ -2,7 +2,7 @@ class ListsController < ApplicationController
 
   layout "customer"
   before_filter :authenticate_customer!
-  before_action :set_list, only: [:show, :edit, :update, :destroy, :import, :upload]
+  before_action :set_list, only: [:show, :edit, :update, :destroy, :import, :upload, :import_map]
 
   # GET /lists
   # GET /lists.json
@@ -81,7 +81,30 @@ class ListsController < ApplicationController
   end
 
   def import_map
+    @temp_contacts = TmpContactList.get_by_key_and_list(params[:key], @list)
+    key_map = @list.column_list.key_map.id
+    key_index = nil
+    columns_map = params[:columns]
 
+    columns_map.each_with_index do |c, i|
+      if c.to_i == key_map
+        key_index = i
+      end
+    end
+
+    @temp_contacts.each do |tmp|
+      contact =  Contact.new
+      contact.list = @list
+      contact.number = tmp.content[key_index] #TODO:validate number is valid
+
+      #hast map column with column_list
+      h = columns_map.each_with_index.map { |x,i| [x, tmp.content[i]] }
+      hash_data = Hash[h]
+      contact.data = hash_data
+      contact.save
+    end
+
+    render :import_map, status: :ok, location: @list
   end
 
   private

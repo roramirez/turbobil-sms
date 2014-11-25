@@ -3,8 +3,10 @@
      <h1 class="page-header">
        Import Contacts Lists
        <div class="pull-right">
-        <%= link_to 'Add to List',  import_map_list_path(@list), class: 'btn btn-default import-data' %>
-        </div>
+        <button type="button" name="my-status" class="btn btn-default import-data">
+          Add to List
+        </button>
+       </div>
      </h1>
   </div>
 </div>
@@ -113,4 +115,25 @@
     }
   }
 
+
+  $('.import-data').on('click', function(e) {
+    $(this).prop('disabled','disabled');
+    $(this).append('<img src="/assets/images/ajloader.gif"></img>');
+
+    $.ajax({
+      url: '<%=  import_map_list_path(@list) %>',
+      type: 'POST',
+      data: {
+        'columns': columns_map,
+        'key': key
+      }
+    }).done(function (response, textStatus, xhr) {
+      $('.import-data').prop('disabled','');
+      $('.import-data').children('img').remove();
+    }).fail(function(error){
+      $('.import-data').prop('disabled','');
+      $('.import-data').children('img').remove();
+    });
+
+   });
 </script>
