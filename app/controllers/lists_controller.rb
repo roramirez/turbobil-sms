@@ -95,16 +95,23 @@ class ListsController < ApplicationController
     @temp_contacts.each do |tmp|
       contact =  Contact.new
       contact.list = @list
-      contact.number = tmp.content[key_index] #TODO:validate number is valid
+      number = tmp.content[key_index].to_s
 
       #hast map column with column_list
       h = columns_map.each_with_index.map { |x,i| [x, tmp.content[i]] }
       hash_data = Hash[h]
       contact.data = hash_data
 
-      exists = Contact.exist_number_on_list(contact.number.to_s, @list)
-      if exists == false
-        contact.save
+      if number.chr != '+'
+        number = '+' + number
+      end
+
+      if number_int = GlobalPhone.parse(number)
+        contact.number = number_int.international_string
+        exists = Contact.exist_number_on_list(contact.number.to_s, @list)
+        if exists == false
+          contact.save
+        end
       end
 
     end
