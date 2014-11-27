@@ -1,3 +1,16 @@
+<!-- Modal -->
+<div class="modal fade centered" id="loadingModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Adding data to list ...</h4>
+      </div>
+      <div class="modal-body">
+         <div  id="loader" class="row text-center"><img src="/images/loader.gif"></div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <div class="row">
   <div class="col-lg-12">
      <h1 class="page-header">
@@ -120,6 +133,11 @@
     $(this).prop('disabled','disabled');
     $(this).append('<img src="/assets/images/ajloader.gif"></img>');
 
+    $('#loadingModal').modal({
+      backdrop: 'static',
+      keyboard: false
+    });
+
     $.ajax({
       url: '<%=  import_map_list_path(@list) %>',
       type: 'POST',
@@ -130,9 +148,11 @@
     }).done(function (response, textStatus, xhr) {
       $('.import-data').prop('disabled','');
       $('.import-data').children('img').remove();
+      $(window).attr("location", "<%= list_contact_index_path(@list) %>");
     }).fail(function(error){
       $('.import-data').prop('disabled','');
       $('.import-data').children('img').remove();
+      $('#loadingModal').modal('hide');
     });
 
    });
