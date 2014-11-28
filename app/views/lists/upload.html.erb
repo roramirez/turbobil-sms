@@ -148,7 +148,7 @@
     }).done(function (response, textStatus, xhr) {
       $('.import-data').prop('disabled','');
       $('.import-data').children('img').remove();
-      $(window).attr("location", "<%= list_contact_index_path(@list) %>");
+      $(window).attr("location", "<%= list_contacts_path(@list) %>");
     }).fail(function(error){
       $('.import-data').prop('disabled','');
       $('.import-data').children('img').remove();

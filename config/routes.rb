@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   resources :campaigns, path: "/customer/campaigns" 
   resources :lists, path: "/customer/lists" do
-    resources :contact
+    resources :contacts
 
     member do
       get 'import'
