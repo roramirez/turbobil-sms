@@ -36,7 +36,7 @@ class ListsController < ApplicationController
 
     respond_to do |format|
       if @list.save
-        format.html { redirect_to @list, notice: 'List was successfully created.' }
+        format.html { redirect_to  import_list_path(@list), notice: 'List was successfully created.' }
         format.json { render :show, status: :created, location: @list }
       else
         format.html { render :new }
@@ -50,7 +50,7 @@ class ListsController < ApplicationController
   def update
     respond_to do |format|
       if @list.update(list_params)
-        format.html { redirect_to @list, notice: 'List was successfully updated.' }
+        format.html { redirect_to lists_path, notice: 'List was successfully updated.' }
         format.json { render :show, status: :ok, location: @list }
       else
         format.html { render :edit }
