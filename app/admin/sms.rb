@@ -1,4 +1,4 @@
-ActiveAdmin.register Call, namespace: :admins do
+ActiveAdmin.register Sms, namespace: :admins do
 
   scope_to :current_admin
 

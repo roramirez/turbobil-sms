@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141122025953) do
+ActiveRecord::Schema.define(version: 20141129165500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,26 +32,6 @@ ActiveRecord::Schema.define(version: 20141122025953) do
 
   add_index "admin", ["email"], name: "index_admin_on_email", unique: true, using: :btree
   add_index "admin", ["reset_password_token"], name: "index_admin_on_reset_password_token", unique: true, using: :btree
-
-  create_table "call", force: true do |t|
-    t.integer  "admin_id"
-    t.integer  "customer_id"
-    t.datetime "at"
-    t.integer  "duration"
-    t.integer  "provider_id"
-    t.integer  "route_id"
-    t.float    "cost"
-    t.text     "destination"
-    t.text     "ip"
-    t.text     "hangupcause"
-    t.integer  "price_customer_id"
-    t.integer  "currency_id"
-    t.text     "dialstatus"
-    t.float    "price_for_customer"
-  end
-
-  add_index "call", ["at", "admin_id"], name: "idx_at_admin_on_call", using: :btree
-  add_index "call", ["at", "customer_id"], name: "idx_at_customer_on_call", using: :btree
 
   create_table "campaign", force: true do |t|
     t.integer  "status"
@@ -174,6 +154,26 @@ ActiveRecord::Schema.define(version: 20141122025953) do
     t.integer "admin_id"
     t.float   "price_list"
   end
+
+  create_table "sms", force: true do |t|
+    t.integer  "admin_id"
+    t.integer  "customer_id"
+    t.datetime "at"
+    t.integer  "duration"
+    t.integer  "provider_id"
+    t.integer  "route_id"
+    t.float    "cost"
+    t.text     "destination"
+    t.text     "ip"
+    t.text     "hangupcause"
+    t.integer  "price_customer_id"
+    t.integer  "currency_id"
+    t.text     "dialstatus"
+    t.float    "price_for_customer"
+  end
+
+  add_index "sms", ["at", "admin_id"], name: "idx_at_admin_on_call", using: :btree
+  add_index "sms", ["at", "customer_id"], name: "idx_at_customer_on_call", using: :btree
 
   create_table "tmp_contact_list", force: true do |t|
     t.text     "key"

@@ -27,7 +27,7 @@ class Customer < ActiveRecord::Base
   end
 
   def minutes_call_last_days(days=7)
-    Call.where(customer: self)
+    Sms.where(customer: self)
         .where("at >= ?", Time.now - days.days)
         .group('DATE(at)')
         .sum(:duration)
