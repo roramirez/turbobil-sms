@@ -33,4 +33,16 @@ class Customer < ActiveRecord::Base
         .sum(:duration)
   end
 
+  def enabled
+    is_enabled = false
+    if type_pay == 1
+      if credit > 0
+        is_enabled = true
+      end
+    elsif type_pay == 2
+      is_enabled = true
+    end
+    is_enabled
+  end
+
 end
