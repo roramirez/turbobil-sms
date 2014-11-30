@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141129224200) do
+ActiveRecord::Schema.define(version: 20141129234432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,12 +124,20 @@ ActiveRecord::Schema.define(version: 20141129224200) do
     t.text     "hangupcause"
     t.integer  "price_customer_id"
     t.integer  "currency_id"
-    t.text     "dialstatus"
     t.float    "price_for_customer"
+    t.text     "status"
+    t.text     "code"
+    t.text     "response"
+    t.integer  "list_id"
+    t.integer  "campaign_id"
+    t.integer  "contact_id"
   end
 
   add_index "outgoing", ["at", "admin_id"], name: "idx_at_admin_on_call", using: :btree
   add_index "outgoing", ["at", "customer_id"], name: "idx_at_customer_on_call", using: :btree
+  add_index "outgoing", ["campaign_id"], name: "index_outgoing_on_campaign_id", using: :btree
+  add_index "outgoing", ["contact_id"], name: "index_outgoing_on_contact_id", using: :btree
+  add_index "outgoing", ["list_id"], name: "index_outgoing_on_list_id", using: :btree
 
   create_table "price_customer", force: true do |t|
     t.text    "name"
