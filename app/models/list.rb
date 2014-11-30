@@ -5,6 +5,7 @@ class List < ActiveRecord::Base
   has_many :campaigns
   has_many :column_list
   has_many :contact
+  has_many :sms_queues
   belongs_to :customer
 
   def to_s

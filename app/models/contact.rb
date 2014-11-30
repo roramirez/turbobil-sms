@@ -1,5 +1,8 @@
 class Contact < ActiveRecord::Base
   self.table_name = 'contact'
+
+  has_many :sms_queues
+
   belongs_to :list
 
   def self.exist_number_on_list(number, list)

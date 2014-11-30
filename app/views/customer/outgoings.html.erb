@@ -10,10 +10,10 @@
       <div class="panel-heading">
         <div class="row">
           <form  class="form-inline form-horizontal" role="form">
-              <label for="call_start" class="control-label input-sm">From</label>
-              <input class="datetimepicker form-control input-sm" id="call_start" name="call_start" type="datetime" value="<%= params[:call_start] %>"/>
-              <label for="call_end" class="control-label input-sm">To</label>
-              <input class="datetimepicker form-control input-sm" id="call_end" name="call_end" type="datetime" value="<%= params[:call_end] %>"/>
+              <label for="outgoing_start" class="control-label input-sm">From</label>
+              <input class="datetimepicker form-control input-sm" id="outgoing_start" name="outgoing_start" type="datetime" value="<%= params[:outgoing_start] %>"/>
+              <label for="outgoing_end" class="control-label input-sm">To</label>
+              <input class="datetimepicker form-control input-sm" id="outgoing_end" name="outgoing_end" type="datetime" value="<%= params[:outgoing_end] %>"/>
               <button class="btn btn-primary btn-sm" type="submit">Filter</button>
           </form>
        </div>
@@ -32,14 +32,14 @@
             </tr>
           </thead>
           <tbody>
-            <% @calls.each do |call| %>
+            <% @outgoings.each do |outgoing| %>
             <tr class="odd gradeX">
-              <td><%= localize(call.at, :format => :long) if call.at.present? %></td>
-              <td><%= call.route %></td>
-              <td><%= call.destination %></td>
-              <td><%= call.duration_hhmmss %></td>
-              <td><%= call.price_for_customer %></td>
-              <td><%= call.ip %></td>
+              <td><%= localize(outgoing.at, :format => :long) if outgoing.at.present? %></td>
+              <td><%= outgoing.route %></td>
+              <td><%= outgoing.destination %></td>
+              <td><%= outgoing.duration_hhmmss %></td>
+              <td><%= outgoing.price_for_customer %></td>
+              <td><%= outgoing.ip %></td>
             </tr>
             <% end %>
            </tbody>
@@ -50,7 +50,7 @@
 </div>
 <div class="row">
   <div class="col-sm-12">
-    <%= paginate @calls, theme:"turbobil" %>
+    <%= paginate @outgoings, theme:"turbobil" %>
    </div>
 </div>
 <script>

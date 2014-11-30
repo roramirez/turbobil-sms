@@ -1,5 +1,5 @@
-class Call < ActiveRecord::Base
-  self.table_name = 'call'
+class Outgoing < ActiveRecord::Base
+  self.table_name = 'outgoing'
   include Filterable
 
   belongs_to :customer
@@ -12,8 +12,8 @@ class Call < ActiveRecord::Base
   scope :ip, ->(ip) {where(ip: ip)}
 
   scope :today, -> {where(:at => Date.today...Date.tomorrow)}
-  scope :call_end, ->(call_end)  {where("at <= :end_date",  {end_date: call_end})}
-  scope :call_start, ->(call_start) {where("at >= :start_date",  {start_date: call_start})}
+  scope :outgoing_end, ->(outgoing_end)  {where("at <= :end_date",  {end_date: outgoing_end})}
+  scope :outgoing_start, ->(outgoing_start) {where("at >= :start_date",  {start_date: outgoing_start})}
 
   def duration_hhmmss
     seconds = 0

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141122025953) do
+ActiveRecord::Schema.define(version: 20141130162559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,26 +32,6 @@ ActiveRecord::Schema.define(version: 20141122025953) do
 
   add_index "admin", ["email"], name: "index_admin_on_email", unique: true, using: :btree
   add_index "admin", ["reset_password_token"], name: "index_admin_on_reset_password_token", unique: true, using: :btree
-
-  create_table "call", force: true do |t|
-    t.integer  "admin_id"
-    t.integer  "customer_id"
-    t.datetime "at"
-    t.integer  "duration"
-    t.integer  "provider_id"
-    t.integer  "route_id"
-    t.float    "cost"
-    t.text     "destination"
-    t.text     "ip"
-    t.text     "hangupcause"
-    t.integer  "price_customer_id"
-    t.integer  "currency_id"
-    t.text     "dialstatus"
-    t.float    "price_for_customer"
-  end
-
-  add_index "call", ["at", "admin_id"], name: "idx_at_admin_on_call", using: :btree
-  add_index "call", ["at", "customer_id"], name: "idx_at_customer_on_call", using: :btree
 
   create_table "campaign", force: true do |t|
     t.integer  "status"
@@ -131,6 +111,34 @@ ActiveRecord::Schema.define(version: 20141122025953) do
 
   add_index "list", ["customer_id"], name: "index_list_on_customer_id", using: :btree
 
+  create_table "outgoing", force: true do |t|
+    t.integer  "admin_id"
+    t.integer  "customer_id"
+    t.datetime "at"
+    t.integer  "duration"
+    t.integer  "provider_id"
+    t.integer  "route_id"
+    t.float    "cost"
+    t.text     "destination"
+    t.text     "ip"
+    t.text     "hangupcause"
+    t.integer  "price_customer_id"
+    t.integer  "currency_id"
+    t.float    "price_for_customer"
+    t.text     "status"
+    t.text     "code"
+    t.text     "response"
+    t.integer  "list_id"
+    t.integer  "campaign_id"
+    t.integer  "contact_id"
+  end
+
+  add_index "outgoing", ["at", "admin_id"], name: "idx_at_admin_on_call", using: :btree
+  add_index "outgoing", ["at", "customer_id"], name: "idx_at_customer_on_call", using: :btree
+  add_index "outgoing", ["campaign_id"], name: "index_outgoing_on_campaign_id", using: :btree
+  add_index "outgoing", ["contact_id"], name: "index_outgoing_on_contact_id", using: :btree
+  add_index "outgoing", ["list_id"], name: "index_outgoing_on_list_id", using: :btree
+
   create_table "price_customer", force: true do |t|
     t.text    "name"
     t.float   "percent_recharge"
@@ -174,6 +182,18 @@ ActiveRecord::Schema.define(version: 20141122025953) do
     t.integer "admin_id"
     t.float   "price_list"
   end
+
+  create_table "sms_queue", force: true do |t|
+    t.integer  "contact_id"
+    t.integer  "campaign_id"
+    t.datetime "process"
+    t.datetime "discard"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sms_queue", ["campaign_id"], name: "index_sms_queue_on_campaign_id", using: :btree
+  add_index "sms_queue", ["contact_id"], name: "index_sms_queue_on_contact_id", using: :btree
 
   create_table "tmp_contact_list", force: true do |t|
     t.text     "key"

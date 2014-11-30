@@ -25,20 +25,20 @@ class CustomerController < ApplicationController
     end
   end
 
-  def calls
-    @calls = calls_filtered
-    @calls = @calls.page(params[:page]).per(10)
+  def outgoings
+    @outgoings = outgoings_filtered
+    @outgoings = @outgoings.page(params[:page]).per(10)
   end
 
-  def calls_filtered
-    @calls = current_customer.calls
+  def outgoings_filtered
+    @outgoings = current_customer.outgoings
 
-    if params[:call_start].blank? and  params[:call_end].blank?
-      params[:call_start] =  DateTime.now.beginning_of_day.strftime('%Y/%m/%d %H:%M:%S')
-      params[:call_end] = DateTime.now.end_of_day.strftime('%Y/%m/%d %H:%M:%S')
+    if params[:outgoing_start].blank? and  params[:outgoing_end].blank?
+      params[:outgoing_start] =  DateTime.now.beginning_of_day.strftime('%Y/%m/%d %H:%M:%S')
+      params[:outgoing_end] = DateTime.now.end_of_day.strftime('%Y/%m/%d %H:%M:%S')
     end
 
-    @calls = @calls.sorted(params[:sort]).filter(params.slice(:ip, :call_start, :call_end))
+    @outgoings = @outgoings.sorted(params[:sort]).filter(params.slice(:ip, :outgoing_start, :outgoing_end))
   end
 
   def prices
@@ -49,7 +49,7 @@ class CustomerController < ApplicationController
   end
 
   def dashboard
-    @min = current_customer.minutes_call_last_days.sort
+    @min = current_customer.minutes_outgoing_last_days.sort
     @minutes = []
     @min.each do |m|
       @minutes.append({date: m[0], minutes: m[1]})
