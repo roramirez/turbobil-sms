@@ -11,14 +11,14 @@ ActiveAdmin.setup do |config|
     admin.authentication_method = :authenticate_admin!
     admin.current_user_method = :current_admin
     admin.logout_link_path = :destroy_admin_session_path
-    admin.root_to = 'calls#index'
+    admin.root_to = 'smss#index'
   end
 
   config.namespace :customers do |customer|
     customer.authentication_method = :authenticate_customer!
     customer.current_user_method = :current_customer
     customer.logout_link_path = :destroy_customer_session_path
-    customer.root_to = 'calls#index'
+    customer.root_to = 'smss#index'
   end
 
 
