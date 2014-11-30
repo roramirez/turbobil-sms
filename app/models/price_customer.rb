@@ -5,7 +5,7 @@ class PriceCustomer < ActiveRecord::Base
   validates_presence_of :percent_recharge
   validates_presence_of :admin_id
 
-  has_many :smss
+  has_many :outgoings
   has_many :rate_customers
 
   belongs_to :admin

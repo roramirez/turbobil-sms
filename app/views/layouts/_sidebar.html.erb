@@ -20,7 +20,7 @@
         <a class="<%= 'active' if current_page?(lists_path) %>" href="<%= url_for :controller => 'lists', :action => 'index' %>"><i class="fa fa-phone fa-fw"></i>Lists</a>
       </li>
       <li>
-        <a class="<%= 'active' if current_page?(customer_smss_path) %>" href="<%= url_for :controller => 'customer', :action => 'smss' %>"><i class="fa fa-phone fa-fw"></i>SMSs</a>
+        <a class="<%= 'active' if current_page?(customer_outgoings_path) %>" href="<%= url_for :controller => 'customer', :action => 'outgoings' %>"><i class="fa fa-phone fa-fw"></i>Outgoings</a>
       </li>
       <li>
         <a class="<%= 'active' if current_page?(customer_prices_path) %>" href="<%= url_for :controller => 'customer', :action => 'prices' %>"><i class="fa fa-usd fa-fw"></i>Prices</a>

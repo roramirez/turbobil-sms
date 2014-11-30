@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   devise_for :admins, ActiveAdmin::Devise.config.merge({path: '/admins'})
   ActiveAdmin.routes(self)
 
-  get  'customer/smss'  => 'customer#smss'
+  get  'customer/outgoings'  => 'customer#outgoings'
   get  'customer/prices'  => 'customer#prices'
   devise_for :customers, :path => '/customer', controllers: { sessions: :sessions }
   get "/customer" => "customer#dashboard"

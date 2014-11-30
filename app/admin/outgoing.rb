@@ -1,4 +1,4 @@
-ActiveAdmin.register Sms, namespace: :admins do
+ActiveAdmin.register Outgoing, namespace: :admins do
 
   scope_to :current_admin
 
@@ -20,8 +20,8 @@ ActiveAdmin.register Sms, namespace: :admins do
       row :destination
       row :customer
       row :duration
-      row "Duration", :sorteable => :duration do |sms|
-        sms.duration_hhmmss
+      row "Duration", :sorteable => :duration do |outgoing|
+        outgoing.duration_hhmmss
       end
       row :cost
       row :price_for_customer
@@ -37,8 +37,8 @@ ActiveAdmin.register Sms, namespace: :admins do
     column :route
     column :destination
     column :customer
-    column "Duration", :sorteable => :duration do |sms|
-      sms.duration_hhmmss
+    column "Duration", :sorteable => :duration do |outgoing|
+      outgoing.duration_hhmmss
     end
     column :cost
     column :price_for_customer

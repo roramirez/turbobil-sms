@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141129165500) do
+ActiveRecord::Schema.define(version: 20141129224200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,26 @@ ActiveRecord::Schema.define(version: 20141129165500) do
 
   add_index "list", ["customer_id"], name: "index_list_on_customer_id", using: :btree
 
+  create_table "outgoing", force: true do |t|
+    t.integer  "admin_id"
+    t.integer  "customer_id"
+    t.datetime "at"
+    t.integer  "duration"
+    t.integer  "provider_id"
+    t.integer  "route_id"
+    t.float    "cost"
+    t.text     "destination"
+    t.text     "ip"
+    t.text     "hangupcause"
+    t.integer  "price_customer_id"
+    t.integer  "currency_id"
+    t.text     "dialstatus"
+    t.float    "price_for_customer"
+  end
+
+  add_index "outgoing", ["at", "admin_id"], name: "idx_at_admin_on_call", using: :btree
+  add_index "outgoing", ["at", "customer_id"], name: "idx_at_customer_on_call", using: :btree
+
   create_table "price_customer", force: true do |t|
     t.text    "name"
     t.float   "percent_recharge"
@@ -154,26 +174,6 @@ ActiveRecord::Schema.define(version: 20141129165500) do
     t.integer "admin_id"
     t.float   "price_list"
   end
-
-  create_table "sms", force: true do |t|
-    t.integer  "admin_id"
-    t.integer  "customer_id"
-    t.datetime "at"
-    t.integer  "duration"
-    t.integer  "provider_id"
-    t.integer  "route_id"
-    t.float    "cost"
-    t.text     "destination"
-    t.text     "ip"
-    t.text     "hangupcause"
-    t.integer  "price_customer_id"
-    t.integer  "currency_id"
-    t.text     "dialstatus"
-    t.float    "price_for_customer"
-  end
-
-  add_index "sms", ["at", "admin_id"], name: "idx_at_admin_on_call", using: :btree
-  add_index "sms", ["at", "customer_id"], name: "idx_at_customer_on_call", using: :btree
 
   create_table "tmp_contact_list", force: true do |t|
     t.text     "key"
