@@ -16,8 +16,20 @@ task :manager_campaign => :environment do
       else
         puts 'is running ' +  campaign.id.to_s
       end
+      campaigns_run = campaign_running
 
     end
   end
 
+end
+
+def campaign_running
+  # get campaings running
+  # return array with ids
+  campaigns = []
+  ps = `ps aux | grep 'queue_msg ID'| grep -v grep`
+  ps.each_line do | line |
+    id = 1
+    campaigns.append(id)
+  end
 end
