@@ -12,7 +12,7 @@ class Customer < ActiveRecord::Base
   validates :password, presence: true, on: :create
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
-  has_many :calls
+  has_many :smss
   has_many :campaigns
   has_many :lists
 
@@ -26,7 +26,7 @@ class Customer < ActiveRecord::Base
     type_payment type_pay
   end
 
-  def minutes_call_last_days(days=7)
+  def minutes_sms_last_days(days=7)
     Sms.where(customer: self)
         .where("at >= ?", Time.now - days.days)
         .group('DATE(at)')

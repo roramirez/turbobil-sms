@@ -3,7 +3,7 @@ class Provider < ActiveRecord::Base
 
   validates_presence_of :name
 
-  has_many :calls
+  has_many :smss
   has_many :rates
 
   belongs_to :admin

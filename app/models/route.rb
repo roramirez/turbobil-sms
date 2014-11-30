@@ -4,7 +4,7 @@ class Route < ActiveRecord::Base
   validates_presence_of :prefix
   validates_presence_of :price_list
 
-  has_many :calls
+  has_many :smss
   has_many :rates_customers
   has_many :rates
 
