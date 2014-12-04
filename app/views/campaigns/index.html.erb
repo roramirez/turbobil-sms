@@ -28,11 +28,11 @@
             </tr>
           </thead>
 
-          <tbody>
+          <tbody id="campaigns">
             <% @campaigns.each do |campaign| %>
-            <tr class="odd gradeX">
+            <tr data-id="<%= campaign.id %>" class="odd gradeX">
               <td><%= campaign.name %></td>
-              <td><%= campaign.status %></td>
+              <td><%= campaign.status_text %></td>
               <td><%= campaign.init %></td>
               <td><%= campaign.list %></td>
               <td><%= link_to 'Edit', edit_campaign_path(campaign) %></td>
@@ -50,4 +50,44 @@
 </div>
 <br>
 
+<script>
 
+  var requestCampaign = true;
+  var ids =  [];
+  var trs = $(".table").find("tbody>tr");
+  $.each(trs, function( key, value ) {
+    var id = $(value).data('id');
+    ids.push(id);
+  });
+
+  setInterval(function () {
+    if (requestCampaign == true) {
+      getCampaignsInfo(ids);
+    }
+  }, 5000);
+
+
+  function getCampaignsInfo(ids) {
+    requestCampaign = false;
+    var req = jQuery.ajax({
+      type: 'GET',
+      url: '<%= campaigns_path %>.json',
+      data: {ids: ids}
+    });
+
+    req.done(function (response) {
+      if (response) {
+        console.log(response);
+      }
+    });
+
+    req.fail(function (response) {
+      console.log(response);
+    });
+
+    req.always(function () {
+      requestCampaign = true;
+    });
+  }
+
+</script>

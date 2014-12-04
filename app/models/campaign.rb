@@ -6,8 +6,13 @@ class Campaign < ActiveRecord::Base
   belongs_to :customer
 
   def status_text
+
     if status == 1
-      'active'
+      if Time.now < init
+        'active'
+      else
+        'waiting'
+      end
     else
       'stopped'
     end
