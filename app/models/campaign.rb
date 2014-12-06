@@ -4,6 +4,7 @@ class Campaign < ActiveRecord::Base
 
   belongs_to :list
   belongs_to :customer
+  has_many :sms_queues
 
   def status_text
 
@@ -17,5 +18,13 @@ class Campaign < ActiveRecord::Base
     else
       'stopped'
     end
+
+
+  belongs_to :list
+  belongs_to :customer
+
+  def self.actives
+    where(status: 1).
+    where("init < ?", DateTime.now)
   end
 end

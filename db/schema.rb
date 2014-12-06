@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141129234432) do
+ActiveRecord::Schema.define(version: 20141130162559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,6 +182,18 @@ ActiveRecord::Schema.define(version: 20141129234432) do
     t.integer "admin_id"
     t.float   "price_list"
   end
+
+  create_table "sms_queue", force: true do |t|
+    t.integer  "contact_id"
+    t.integer  "campaign_id"
+    t.datetime "process"
+    t.datetime "discard"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sms_queue", ["campaign_id"], name: "index_sms_queue_on_campaign_id", using: :btree
+  add_index "sms_queue", ["contact_id"], name: "index_sms_queue_on_contact_id", using: :btree
 
   create_table "tmp_contact_list", force: true do |t|
     t.text     "key"
