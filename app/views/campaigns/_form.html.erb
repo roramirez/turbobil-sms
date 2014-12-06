@@ -20,9 +20,14 @@
     </div>
 
 
-    <div class="form-group col-sm-4">
+    <div class="form-group col-sm-3">
       <label>Init</label>
       <%= f.text_field :init, autofocus: true, class: 'datetimepicker form-control input-sm', as: 'datetime' %>
+    </div>
+
+    <div class="form-group col-sm-1">
+      <label>Active</label>
+      <%= check_box 'campaign', 'status', {}, '1', '0' %>
     </div>
 
   </div>

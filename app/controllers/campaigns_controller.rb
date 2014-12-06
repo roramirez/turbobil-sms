@@ -7,9 +7,13 @@ class CampaignsController < ApplicationController
   # GET /campaigns
   # GET /campaigns.json
   def index
-    @campaigns = current_customer.campaigns
+    if params[:ids]
+      @campaigns = current_customer.campaigns.find(params[:ids])
+    else
+      @campaigns = current_customer.campaigns
                               .page(params[:page]).per(10)
                               .sorted(params[:sort])
+    end
   end
 
   # GET /campaigns/1
@@ -75,6 +79,6 @@ class CampaignsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def campaign_params
-      params.require(:campaign).permit(:init, :name, :text, :list_id)
+      params.require(:campaign).permit(:init, :name, :text, :list_id, :status)
     end
 end
