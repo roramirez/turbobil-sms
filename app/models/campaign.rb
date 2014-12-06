@@ -1,6 +1,6 @@
 class Campaign < ActiveRecord::Base
+  include ActionView::Helpers::DateHelper
   self.table_name = 'campaign'
-
 
   belongs_to :list
   belongs_to :customer
@@ -8,10 +8,11 @@ class Campaign < ActiveRecord::Base
   def status_text
 
     if status == 1
-      if Time.now < init
+      if Time.now > init
         'active'
       else
-        'waiting'
+        from_time = (init - Time.now).ago
+        'waiting ' + time_ago_in_words(from_time)
       end
     else
       'stopped'
