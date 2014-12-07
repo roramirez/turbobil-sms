@@ -23,4 +23,14 @@ class Campaign < ActiveRecord::Base
     where(status: 1).
     where("init < ?", DateTime.now)
   end
+
+  def get_sms_pending
+    sms_send = sms_queues
+    contact_send_ids = []
+    sms_send.each do |send|
+      contact_send_ids.append(send.contact_id)
+    end
+    list.contact.where.not(id: contact_send_ids)
+  end
+
 end
