@@ -34,7 +34,7 @@ class Campaign < ActiveRecord::Base
   end
 
   def percent
-    ((get_sms_pending.count * 100) / list.contact.count).abs
+    (((get_sms_pending.count * 100) / list.contact.count) - 100).abs
   rescue ZeroDivisionError
     100
   end
