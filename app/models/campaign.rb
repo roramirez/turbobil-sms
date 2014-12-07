@@ -33,4 +33,9 @@ class Campaign < ActiveRecord::Base
     list.contact.where.not(id: contact_send_ids)
   end
 
+  def percent
+    ((get_sms_pending.count * 100) / list.contact.count).abs
+  rescue ZeroDivisionError
+    100
+  end
 end
