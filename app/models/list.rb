@@ -29,6 +29,14 @@ class List < ActiveRecord::Base
     key
   end
 
+  def columns_hash
+    hash = {}
+    column_list.each do |column|
+      hash[column.name.upcase] = column.id
+    end
+    hash
+  end
+
   private
   def open_spreadsheet(file)
     case File.extname(file.original_filename)

@@ -32,7 +32,12 @@
             <% @campaigns.each do |campaign| %>
             <tr data-id="<%= campaign.id %>" class="odd gradeX">
               <td><%= campaign.name %></td>
-              <td><span id="status-<%= campaign.id %>"><%= campaign.status_text %></span></td>
+              <td>
+              <span id="status-<%= campaign.id %>"><%= campaign.status_text %></span>
+                <div class="progress progress-info">
+                  <div class="progress-bar progress-id-<%= campaign.id %>" style="width: <%= campaign.percent %>%;"><%= campaign.percent%>%</div>
+                </div>
+              </td>
               <td><%= campaign.init %></td>
               <td><%= campaign.list %></td>
               <td><%= link_to 'Edit', edit_campaign_path(campaign) %></td>
@@ -64,7 +69,7 @@
     if (requestCampaign == true) {
       getCampaignsInfo(ids);
     }
-  }, 5000);
+  }, 10000);
 
 
   function getCampaignsInfo(ids) {
@@ -79,6 +84,8 @@
       if (response) {
         $.each(response, function(key, value){
           $('#status-' + value.id).html(value.status_text);
+          $('.progress-id-12').css('width', value.percent + '%');
+          $('.progress-id-12').html(value.percent + '%');
         });
       }
     });

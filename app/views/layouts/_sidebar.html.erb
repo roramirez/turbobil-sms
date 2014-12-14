@@ -11,16 +11,13 @@
 
     <ul class="nav" id="side-menu">
       <li>
-        <a class="<%= 'active' if current_page?(customer_path) %>" href="<%= url_for :controller => 'customer', :action => 'dashboard' %>"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
+        <a class="<%= 'active' if current_page?(campaigns_path) %>" href="<%= url_for :controller => 'campaigns', :action => 'index' %>"><i class="fa fa-bullhorn fa-fw"></i>Campaigns</a>
       </li>
       <li>
-        <a class="<%= 'active' if current_page?(campaigns_path) %>" href="<%= url_for :controller => 'campaigns', :action => 'index' %>"><i class="fa fa-phone fa-fw"></i>Campaigns</a>
+        <a class="<%= 'active' if current_page?(lists_path) %>" href="<%= url_for :controller => 'lists', :action => 'index' %>"><i class="fa fa-list fa-fw"></i>Lists</a>
       </li>
       <li>
-        <a class="<%= 'active' if current_page?(lists_path) %>" href="<%= url_for :controller => 'lists', :action => 'index' %>"><i class="fa fa-phone fa-fw"></i>Lists</a>
-      </li>
-      <li>
-        <a class="<%= 'active' if current_page?(customer_outgoings_path) %>" href="<%= url_for :controller => 'customer', :action => 'outgoings' %>"><i class="fa fa-phone fa-fw"></i>Outgoings</a>
+        <a class="<%= 'active' if current_page?(customer_outgoings_path) %>" href="<%= url_for :controller => 'customer', :action => 'outgoings' %>"><i class="fa fa-send fa-fw"></i>Outgoings</a>
       </li>
       <li>
         <a class="<%= 'active' if current_page?(customer_prices_path) %>" href="<%= url_for :controller => 'customer', :action => 'prices' %>"><i class="fa fa-usd fa-fw"></i>Prices</a>
