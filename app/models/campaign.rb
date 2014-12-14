@@ -5,6 +5,7 @@ class Campaign < ActiveRecord::Base
   belongs_to :list
   belongs_to :customer
   has_many :sms_queues
+  has_many :outgoings
 
   def status_text
     if status == 1
@@ -30,7 +31,7 @@ class Campaign < ActiveRecord::Base
     sms_send.each do |send|
       contact_send_ids.append(send.contact_id)
     end
-    list.contact.where.not(id: contact_send_ids)
+    list.contact.where.not(id: contact_send_ids).order(:id)
   end
 
   def percent
