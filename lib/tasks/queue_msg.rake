@@ -14,27 +14,34 @@ task :queue_msg => :environment do
     if campaign.customer.enabled
       sms = contact.convert_message_text(campaign.text, columns_hash)
 
-      # send message
-      # id send
-      id_sender =  SecureRandom.hex(8)
+      routes = customer.rates(contact.number)
+      routes.each do | route |
+        # send message
+        id_sender = SmsService.new.execute(sms, contact.number, route.provider)
+        # register outgoing
+        o = Outgoing.new
+        o.provider = p
+        o.text = sms
+        o.customer = customer
+        o.destination = contact.number
+        o.contact = contact
+        o.code = id_sender
+        o.list = campaign.list
+        o.campaign = campaign
+        o.save
+
+        if id_sender
+          break
+        end
+
+      end
+
       # register on sms_queue
       q = SmsQueue.new
       q.contact = contact
       q.campaign = campaign
       q.process = Time.now
       q.save
-
-      # register outgoing
-      o = Outgoing.new
-      o.provider = p
-      o.text = sms
-      o.customer = customer
-      o.destination = contact.number
-      o.contact = contact
-      o.code = id_sender
-      o.list = campaign.list
-      o.campaign = campaign
-      o.save
 
       sleep(1000)
     else
