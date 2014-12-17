@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141130162559) do
+ActiveRecord::Schema.define(version: 20141214215139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 20141130162559) do
     t.integer  "list_id"
     t.integer  "campaign_id"
     t.integer  "contact_id"
+    t.text     "text"
   end
 
   add_index "outgoing", ["at", "admin_id"], name: "idx_at_admin_on_call", using: :btree

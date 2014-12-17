@@ -6,6 +6,7 @@ class List < ActiveRecord::Base
   has_many :column_list
   has_many :contact
   has_many :sms_queues
+  has_many :outgoings
   belongs_to :customer
 
   def to_s

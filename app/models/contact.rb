@@ -2,6 +2,7 @@ class Contact < ActiveRecord::Base
   self.table_name = 'contact'
 
   has_many :sms_queues
+  has_many :outgoings
 
   belongs_to :list
 

@@ -8,6 +8,9 @@ class Outgoing < ActiveRecord::Base
   belongs_to :route
   belongs_to :price_customer
   belongs_to :admin
+  belongs_to :contact
+  belongs_to :list
+  belongs_to :campaign
 
   scope :ip, ->(ip) {where(ip: ip)}
 
