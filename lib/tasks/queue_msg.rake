@@ -1,4 +1,4 @@
-desc "Manager run/stop campaign for delivery msg"
+desc "delivery msg for queue on campaign"
 
 task :queue_msg => :environment do
   # get campaign by id
@@ -31,17 +31,16 @@ task :queue_msg => :environment do
         o.save
 
         if id_sender
+          # register on sms_queue
+          q = SmsQueue.new
+          q.contact = contact
+          q.campaign = campaign
+          q.process = Time.now
+          q.save
           break
         end
 
       end
-
-      # register on sms_queue
-      q = SmsQueue.new
-      q.contact = contact
-      q.campaign = campaign
-      q.process = Time.now
-      q.save
 
       sleep(1000)
     else
