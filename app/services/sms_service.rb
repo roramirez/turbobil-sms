@@ -8,12 +8,16 @@ class SmsService
         account_sid = provider.username
         auth_token = provider.password
 
-        @client = Twilio::REST::Client.new account_sid, auth_token
-        message = @client.account.messages.create(:body => text,
-                      :to => to,
-                      :from => "+12052094747")
-        return message.sid
-        #return "SM11b307fb49844f159c8d9a17ef6e2f39"
+        begin
+          @client = Twilio::REST::Client.new account_sid, auth_token
+          message = @client.account.messages.create(:body => text,
+                        :to => to,
+                        :from => "+12052094747")
+          return message.sid
+        rescue => e
+          Rails.logger.warn "Unable to sms send, will ignore: #{e}"
+          return nil
+        end
       end
     end
 
