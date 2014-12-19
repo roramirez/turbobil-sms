@@ -21,7 +21,7 @@ class Contact < ActiveRecord::Base
         text = text.gsub(key_msg, columns_hash[k])
       end
     end
-    text
+    I18n.transliterate(text)
   end
 
 end
