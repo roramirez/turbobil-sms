@@ -11,7 +11,7 @@ task :queue_msg => :environment do
   columns_hash = campaign.list.columns_hash
   queue.each do | contact |
     # check customer credit
-    if campaign.customer.enabled
+    if customer.enabled
       sms = contact.convert_message_text(campaign.text, columns_hash)
 
       routes = customer.rates(contact.number)
