@@ -2,7 +2,7 @@ ActiveAdmin.register Route do
 
   scope_to :current_admin
 
-  permit_params :prefix, :name, :price_list
+  permit_params :prefix, :name, :price_list, :telco_id
 
   filter :name
   filter :prefix
@@ -12,6 +12,7 @@ ActiveAdmin.register Route do
       f.input :prefix,        :as => :string
       f.input :name,          :as => :string
       f.input :price_list
+      f.input :telco_id
     end
     f.actions
   end
@@ -21,6 +22,7 @@ ActiveAdmin.register Route do
       row :prefix
       row :name
       row :price_list
+      row :telco_id
     end
   end
 
@@ -28,6 +30,7 @@ ActiveAdmin.register Route do
     column :prefix
     column :name
     column :price_list
+    column :telco_id
     actions
   end
 
