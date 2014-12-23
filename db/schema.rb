@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141214215139) do
+ActiveRecord::Schema.define(version: 20141223005233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,6 +182,7 @@ ActiveRecord::Schema.define(version: 20141214215139) do
     t.text    "name"
     t.integer "admin_id"
     t.float   "price_list"
+    t.integer "telco_id"
   end
 
   create_table "sms_queue", force: true do |t|
