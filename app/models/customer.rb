@@ -49,6 +49,7 @@ class Customer < ActiveRecord::Base
     for i in 0..number.length
       prefix = number[0, number.length - i]
       r = admin.routes.where(prefix: prefix)
+        .limit(1)  #FIXME: #uggly fix
       if r.count > 0
         return r
       end
