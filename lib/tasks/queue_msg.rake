@@ -20,7 +20,7 @@ task :queue_msg => :environment do
         id_sender = SmsService.new.execute(sms, contact.number, route.provider)
         # register outgoing
         o = Outgoing.new
-        o.provider = p
+        o.provider = route.provider
         o.text = sms
         o.customer = customer
         o.destination = contact.number
