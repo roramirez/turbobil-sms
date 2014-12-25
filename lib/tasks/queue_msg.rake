@@ -29,6 +29,7 @@ task :queue_msg => :environment do
         o.list = campaign.list
         o.campaign = campaign
         o.at = Time.now
+        o.price_for_customer = customer.price_customer_id
         o.save
 
         if id_sender
