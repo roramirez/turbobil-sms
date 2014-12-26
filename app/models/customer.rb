@@ -45,10 +45,14 @@ class Customer < ActiveRecord::Base
     is_enabled
   end
 
-  def routes_by_number(number)
+  def routes_by_number(number, limit_one = true)
     for i in 0..number.length
       prefix = number[0, number.length - i]
-      r = admin.routes.where(prefix: prefix)
+      if limit_one
+        r = admin.routes.where(prefix: prefix).limit(1)  #FIXME: #uggly fix
+      else
+        r = admin.routes.where(prefix: prefix)
+      end
       if r.count > 0
         return r
       end

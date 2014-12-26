@@ -11,7 +11,7 @@ task :queue_msg => :environment do
   columns_hash = campaign.list.columns_hash
   queue.each do | contact |
     # check customer credit
-    if campaign.customer.enabled
+    if customer.enabled
       sms = contact.convert_message_text(campaign.text, columns_hash)
 
       routes = customer.rates(contact.number)
@@ -29,6 +29,7 @@ task :queue_msg => :environment do
         o.list = campaign.list
         o.campaign = campaign
         o.at = Time.now
+        o.price_customer_id = customer.price_customer_id
         o.save
 
         if id_sender
@@ -38,12 +39,15 @@ task :queue_msg => :environment do
           q.campaign = campaign
           q.process = Time.now
           q.save
+          sleep(5)
+          RateSmsService.new.execute(o)
           break
         end
 
       end
 
-      sleep(1000)
+      sleep(3)
+      customer = Customer.find(customer.id)
     else
       return 'customer without credit'
     end
