@@ -8,4 +8,23 @@ class Rate < ActiveRecord::Base
 
   belongs_to :provider
   belongs_to :route
+
+  def self.get_by_outgoing(outgoing)
+    # get routes
+    routes = outgoing.customer.routes_by_number(outgoing.destination, false)
+
+    #Refactor this
+    rate = where(route: routes, price: outgoing.cost..Float::INFINITY)
+           .order(:price)
+           .first
+
+    if rate.nil?
+      rate = where(route: routes,price: 0..outgoing.cost)
+             .order(price: :desc)
+             .first
+    end
+    rate
+  end
+
+
 end

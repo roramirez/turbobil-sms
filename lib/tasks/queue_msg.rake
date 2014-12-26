@@ -29,7 +29,7 @@ task :queue_msg => :environment do
         o.list = campaign.list
         o.campaign = campaign
         o.at = Time.now
-        o.price_for_customer = customer.price_customer_id
+        o.price_customer_id = customer.price_customer_id
         o.save
 
         if id_sender
@@ -39,12 +39,15 @@ task :queue_msg => :environment do
           q.campaign = campaign
           q.process = Time.now
           q.save
+          sleep(5)
+          RateSmsService.new.execute(o)
           break
         end
 
       end
 
-      sleep(1000)
+      sleep(3)
+      customer = Customer.find(customer.id)
     else
       return 'customer without credit'
     end
