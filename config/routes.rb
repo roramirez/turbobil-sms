@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   devise_for :admins, ActiveAdmin::Devise.config.merge({path: '/admins'})
   ActiveAdmin.routes(self)
 
-  get  'customer/outgoings'  => 'customer#outgoings'
   get  'customer/prices'  => 'customer#prices'
   devise_for :customers, :path => '/customer', controllers: { sessions: :sessions }
   get "/customer" => "customer#dashboard"
@@ -18,7 +17,7 @@ Rails.application.routes.draw do
   post '/customer/profile' =>  'customer#update_profile', as: :customer_update_profile
 
 
-  resources :campaigns, path: "/customer/campaigns" 
+  resources :campaigns, path: "/customer/campaigns"
   resources :lists, path: "/customer/lists" do
     resources :contacts
 
@@ -30,6 +29,8 @@ Rails.application.routes.draw do
 
     resources :column_lists
   end
+
+  resources :outgoings, path: "/customer/outgoings", only: [:index, :show]
 
 end
 
