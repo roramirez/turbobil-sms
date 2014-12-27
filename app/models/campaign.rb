@@ -39,4 +39,9 @@ class Campaign < ActiveRecord::Base
   rescue ZeroDivisionError
     100
   end
+
+  def to_s
+    name
+  end
+
 end

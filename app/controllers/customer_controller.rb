@@ -25,22 +25,6 @@ class CustomerController < ApplicationController
     end
   end
 
-  def outgoings
-    @outgoings = outgoings_filtered
-    @outgoings = @outgoings.page(params[:page]).per(10)
-  end
-
-  def outgoings_filtered
-    @outgoings = current_customer.outgoings
-
-    if params[:outgoing_start].blank? and  params[:outgoing_end].blank?
-      params[:outgoing_start] =  DateTime.now.beginning_of_day.strftime('%Y/%m/%d %H:%M:%S')
-      params[:outgoing_end] = DateTime.now.end_of_day.strftime('%Y/%m/%d %H:%M:%S')
-    end
-
-    @outgoings = @outgoings.sorted(params[:sort]).filter(params.slice(:ip, :outgoing_start, :outgoing_end))
-  end
-
   def prices
     @prices_customer = PriceCustomer.get_join_route(current_customer.price_customer_id)
                                     .page(params[:page])
