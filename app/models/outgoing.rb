@@ -13,6 +13,7 @@ class Outgoing < ActiveRecord::Base
   belongs_to :campaign
 
   scope :ip, ->(ip) {where(ip: ip)}
+  scope :campaign, ->(campaign) {where(campaign_id: campaign)}
 
   scope :today, -> {where(:at => Date.today...Date.tomorrow)}
   scope :outgoing_end, ->(outgoing_end)  {where("at <= :end_date",  {end_date: outgoing_end})}

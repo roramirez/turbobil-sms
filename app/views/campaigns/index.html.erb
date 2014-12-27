@@ -40,7 +40,12 @@
               </td>
               <td><%= campaign.init %></td>
               <td><%= campaign.list %></td>
-              <td><%= link_to 'Edit', edit_campaign_path(campaign) %></td>
+              <td>
+                <%= link_to 'Edit', edit_campaign_path(campaign) %>
+                <%= link_to "Show outgoing SMSs", outgoings_path(:campaign => campaign.id) %>
+
+
+              </td>
             </tr>
             <% end %>
          </tbody>

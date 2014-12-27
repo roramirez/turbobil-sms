@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-12">
-    <h1 class="page-header">Calls</h1>
+    <h1 class="page-header">Outgoing</h1>
   </div>
 <!-- /.col-lg-12 -->
 </div>
@@ -9,13 +9,19 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="row">
-          <form  class="form-inline form-horizontal" role="form">
-              <label for="outgoing_start" class="control-label input-sm">From</label>
-              <input class="datetimepicker form-control input-sm" id="outgoing_start" name="outgoing_start" type="datetime" value="<%= params[:outgoing_start] %>"/>
-              <label for="outgoing_end" class="control-label input-sm">To</label>
-              <input class="datetimepicker form-control input-sm" id="outgoing_end" name="outgoing_end" type="datetime" value="<%= params[:outgoing_end] %>"/>
-              <button class="btn btn-primary btn-sm" type="submit">Filter</button>
-          </form>
+          <%= simple_form_for :outgoing, :url => '/customer/outgoings', :html => {:method => :get}  do |f| %>
+            <div class="col-md-3">
+            <%= f.input 'campaign',
+                :collection => current_customer.campaigns,
+                :selected => params[:campaign],
+                :input_html => {
+                  :name => 'campaign',
+                  :class => 'form-control',
+                },
+                :as => 'select' %>
+            </div>
+            <button class="btn btn-primary btn-sm" type="submit">Filter</button>
+          <% end %>
        </div>
      </div>
 
@@ -26,9 +32,9 @@
               <th><%=  link_to_sorted "At", :at %></th>
               <th><%=  link_to_sorted "Route", :route_id %></th>
               <th><%=  link_to_sorted "Destination", :destination %></th>
-              <th><%=  link_to_sorted "Duration", :duration %></th>
+              <th><%=  link_to_sorted "Status", :status %></th>
               <th><%=  link_to_sorted "Cost", :price_for_customer %></th>
-              <th><%=  link_to_sorted "IP", :ip %></th>
+              <th><%=  link_to_sorted "Campaign", :campaign_id %></th>
             </tr>
           </thead>
           <tbody>
@@ -37,9 +43,9 @@
               <td><%= localize(outgoing.at, :format => :long) if outgoing.at.present? %></td>
               <td><%= outgoing.route %></td>
               <td><%= outgoing.destination %></td>
-              <td><%= outgoing.duration_hhmmss %></td>
+              <td><%= outgoing.status %></td>
               <td><%= outgoing.price_for_customer %></td>
-              <td><%= outgoing.ip %></td>
+              <td><%= outgoing.campaign %></td>
             </tr>
             <% end %>
            </tbody>
