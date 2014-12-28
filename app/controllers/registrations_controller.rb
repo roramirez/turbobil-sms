@@ -15,8 +15,10 @@ class RegistrationsController < Devise::RegistrationsController
   def build_resource(hash=nil)
     super
     #init value new customer
+    admin = Admin.first
     self.resource.type_pay = 1
-    self.resource.admin = Admin.first
+    self.resource.admin = admi
+    self.resource.price_customer = admin.price_customer
     self.resource.credit = 0
     self.resource
   end

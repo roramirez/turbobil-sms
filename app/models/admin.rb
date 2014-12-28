@@ -10,4 +10,7 @@ class Admin < ActiveRecord::Base
   has_many :routes
   has_many :providers
   has_many :customers
+
+  belongs_to :default_price_customer, class_name: "PriceCustomer"
+
 end
