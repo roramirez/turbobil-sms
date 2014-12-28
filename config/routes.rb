@@ -12,8 +12,10 @@ Rails.application.routes.draw do
 
   get  'customer/outgoings'  => 'customer#outgoings'
   get  'customer/prices'  => 'customer#prices'
-  devise_for :customers, :path => '/customer', controllers: { sessions: :sessions }
-  get "/customer" => "customer#dashboard"
+
+  devise_for :customers, :path => '/customer', controllers: { registrations: :registrations , passwords: :passwords, sessions: :sessions, confirmations: :confirmations }
+
+  get "/customer" => "campaigns#index"
   get '/customer/profile' =>  'customer#profile', as: :customer_profile
   post '/customer/profile' =>  'customer#update_profile', as: :customer_update_profile
 
