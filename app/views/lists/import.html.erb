@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Upload contact to <%= @list.name %></h1>
+  </div>
+<!-- /.col-lg-12 -->
+</div>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <%= form_tag upload_list_path, multipart: true do %>
+
+              <div class="form-group">
+                  <%= file_field_tag :file %>
+              </div>
+
+              <div class="form-group">
+              </div>
+
+
+              <%= submit_tag "Import", class: 'btn btn-default' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

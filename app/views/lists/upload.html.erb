@@ -1,0 +1,159 @@
+<!-- Modal -->
+<div class="modal fade centered" id="loadingModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Adding data to list ...</h4>
+      </div>
+      <div class="modal-body">
+         <div  id="loader" class="row text-center"><img src="/images/loader.gif"></div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="row">
+  <div class="col-lg-12">
+     <h1 class="page-header">
+       Import Contacts Lists
+       <div class="pull-right">
+        <button type="button" name="my-status" class="btn btn-default import-data">
+          Add to List
+        </button>
+       </div>
+     </h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover" id="dataTable">
+          <thead>
+            <tr role="row">
+            <% @temp_contacts[0].content.each_with_index do |c, i| %>
+              <th>
+                <span id="f_newcol-<%= i %>">
+                  <div class="form-group">
+                    <label>New Column Name</label>
+                    <%= form_for [@list, ColumnList.new] , format: :json ,remote: true , html: {'data-id' => i}  do |f| %>
+                      <input id="newcol-<%= i %>" class="form-control" value="" maxlength="50" type="text" name="column_list[name]">
+                      <input id="submit-newcol-<%= i %>" class="btn btn-default" name="submit-newcol-<%= i%>" type="submit" value="Save">
+                      <input id="discard-newcol-<%= i %>" class="btn btn-default" name="discard-newcol-<%= i%>" data-id="<%= i %>" type="button" value="Discard">
+                    <% end %>
+                  </div>
+                </span>
+                <div class="form-group">
+                <select id="sel_col_<%= i %>" class="form-control" data-id="<%= i %>" >
+                  <option value="0" selected="selected">Select option</option>
+                  <option value="new">New column</option>
+                  <optgroup label="Available Column Names">
+                  <% @list.column_list.each do |col| %>
+                  <option value="<%= col.id %>"><%= col.name %></option>
+                  <% end %>
+                  </optgroup>
+                </select>
+                </div>
+              </th>
+            <% end %>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="odd gradeX">
+            <% @temp_contacts.each do |tmp| %>
+              <% tmp.content.each do |col| %>
+                <td><%= col %></td>
+              <% end %>
+            </tr>
+            <% end %>
+         </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  var columns_map = [];
+  var key = '<%= @key %>';
+  var key_map = <%= @list.column_list.key_map.id %>;
+  $('select[id^="sel_col"]').on('change', function (e) {
+    var value = $(this).val();
+    var id = $(this).data('id');
+     if (value == 'new') {
+      $("span[id=f_newcol-" + id + "]").show();
+      $("#newcol-" + id ).focus()
+     }else{
+      $("span[id=f_newcol-" + id + "]").hide();
+      $("select[id^=sel_col] option[value=" + value + "]").attr('disabled','disabled')
+      addColumn(id, value);
+      $(this).find('option:selected').removeAttr('disabled');
+     }
+   });
+
+  $('input[name^="discard-newcol"]').on('click', function() {
+    var id = $(this).data('id');
+    $("span[id=f_newcol-" + id + "]").hide();
+    $('#sel_col_' + id ).val(0)
+  });
+
+  $('.new_column_list').bind('ajax:success', function(data, status, xhr){
+    var id = $(this).data('id');
+    var option = new Option(status.name, status.id);
+    $("select[id^=sel_col] optgroup").append(option);
+    $("span[id=f_newcol-" + id + "]").hide();
+    $("select[id^=sel_col] option[value=" + status.id + "]").attr('disabled','disabled');
+    $('#sel_col_' + id ).val(status.id)
+    addColumn(id, status.id);
+    $(this).find('option:selected').removeAttr('disabled');  
+  });
+
+  $("span[id*=f_newcol]").hide();
+  $('.import-data').addClass('disabled');
+
+  function addColumn(id, column) {
+    var value = parseInt(column);
+    columns_map[id] = value;
+
+    var enable = false;
+    $.each(columns_map,  function( index, value ) {
+      if (key_map == value) {
+        enable = true;
+      }
+    });
+
+    if (enable) {
+      $('.import-data').removeClass('disabled');
+    }else{
+      $('.import-data').addClass('disabled');
+    }
+  }
+
+
+  $('.import-data').on('click', function(e) {
+    $(this).prop('disabled','disabled');
+    $(this).append('<img src="/assets/images/ajloader.gif"></img>');
+
+    $('#loadingModal').modal({
+      backdrop: 'static',
+      keyboard: false
+    });
+
+    $.ajax({
+      url: '<%=  import_map_list_path(@list) %>',
+      type: 'POST',
+      data: {
+        'columns': columns_map,
+        'key': key
+      }
+    }).done(function (response, textStatus, xhr) {
+      $('.import-data').prop('disabled','');
+      $('.import-data').children('img').remove();
+      $(window).attr("location", "<%= list_contacts_path(@list) %>");
+    }).fail(function(error){
+      $('.import-data').prop('disabled','');
+      $('.import-data').children('img').remove();
+      $('#loadingModal').modal('hide');
+    });
+
+   });
+</script>

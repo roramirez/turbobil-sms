@@ -30,7 +30,7 @@ gem 'spring',        group: :development
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -57,3 +57,6 @@ gem 'bootstrap-sass', '~> 3.2'
 gem "font-awesome-rails", '~> 4.1'
 gem 'morrisjs-rails'
 gem 'raphael-rails'
+gem 'roo'
+gem 'global_phone'
+gem 'twilio-ruby'

@@ -11,43 +11,112 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141014020434) do
+ActiveRecord::Schema.define(version: 20141228181241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "account", force: true do |t|
-    t.text    "code"
-    t.integer "admin_id"
-    t.integer "customer_id"
-    t.integer "status"
-    t.text    "ip_auth"
-    t.text    "password"
-  end
-
-  create_table "account_codec", force: true do |t|
-    t.integer "account_id"
-    t.integer "codec_id"
-  end
-
   create_table "admin", force: true do |t|
     t.text     "name"
-    t.string   "email",                  limit: 320,              null: false
-    t.string   "encrypted_password",                 default: "", null: false
+    t.string   "email",                     limit: 320,              null: false
+    t.string   "encrypted_password",                    default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.integer  "sign_in_count",                         default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.integer  "default_price_customer_id"
   end
 
   add_index "admin", ["email"], name: "index_admin_on_email", unique: true, using: :btree
   add_index "admin", ["reset_password_token"], name: "index_admin_on_reset_password_token", unique: true, using: :btree
 
-  create_table "call", force: true do |t|
+  create_table "campaign", force: true do |t|
+    t.integer  "status"
+    t.text     "text"
+    t.datetime "init"
+    t.integer  "customer_id"
+    t.integer  "list_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+  end
+
+  add_index "campaign", ["customer_id"], name: "index_campaign_on_customer_id", using: :btree
+  add_index "campaign", ["list_id"], name: "index_campaign_on_list_id", using: :btree
+
+  create_table "column_list", force: true do |t|
+    t.string   "name"
+    t.integer  "list_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "type"
+    t.boolean  "key",        default: false
+  end
+
+  add_index "column_list", ["list_id"], name: "index_column_list_on_list_id", using: :btree
+
+  create_table "contact", force: true do |t|
+    t.string   "number"
+    t.json     "data"
+    t.integer  "list_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "contact", ["list_id"], name: "index_contact_on_list_id", using: :btree
+
+  create_table "currency", force: true do |t|
+    t.text  "sign"
+    t.text  "name"
+    t.text  "code"
+    t.float "value_convert"
+  end
+
+  create_table "customer", force: true do |t|
+    t.text     "name"
+    t.string   "email",                  limit: 320,                null: false
+    t.float    "credit"
+    t.integer  "type_pay"
+    t.integer  "customer_id"
+    t.integer  "type_customer_id"
+    t.integer  "admin_id"
+    t.integer  "currency_id"
+    t.integer  "price_customer_id"
+    t.string   "encrypted_password",                 default: "",   null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                      default: 0,    null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.boolean  "active",                             default: true
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.text     "confirmation_token"
+    t.string   "unconfirmed_email"
+  end
+
+  add_index "customer", ["email"], name: "index_customer_on_email", unique: true, using: :btree
+  add_index "customer", ["price_customer_id"], name: "index_customer_on_price_customer_id", using: :btree
+  add_index "customer", ["reset_password_token"], name: "index_customer_on_reset_password_token", unique: true, using: :btree
+
+  create_table "list", force: true do |t|
+    t.string   "name"
+    t.integer  "customer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "map",         default: true
+  end
+
+  add_index "list", ["customer_id"], name: "index_list_on_customer_id", using: :btree
+
+  create_table "outgoing", force: true do |t|
     t.integer  "admin_id"
     t.integer  "customer_id"
     t.datetime "at"
@@ -60,49 +129,21 @@ ActiveRecord::Schema.define(version: 20141014020434) do
     t.text     "hangupcause"
     t.integer  "price_customer_id"
     t.integer  "currency_id"
-    t.text     "dialstatus"
     t.float    "price_for_customer"
+    t.text     "status"
+    t.text     "code"
+    t.text     "response"
+    t.integer  "list_id"
+    t.integer  "campaign_id"
+    t.integer  "contact_id"
+    t.text     "text"
   end
 
-  add_index "call", ["at", "admin_id"], name: "idx_at_admin_on_call", using: :btree
-  add_index "call", ["at", "customer_id"], name: "idx_at_customer_on_call", using: :btree
-
-  create_table "codec", force: true do |t|
-    t.text "name"
-    t.text "code"
-  end
-
-  create_table "currency", force: true do |t|
-    t.text  "sign"
-    t.text  "name"
-    t.text  "code"
-    t.float "value_convert"
-  end
-
-  create_table "customer", force: true do |t|
-    t.text     "name"
-    t.string   "email",                  limit: 320,              null: false
-    t.float    "credit"
-    t.integer  "type_pay"
-    t.integer  "customer_id"
-    t.integer  "type_customer_id"
-    t.integer  "admin_id"
-    t.integer  "currency_id"
-    t.integer  "price_customer_id"
-    t.string   "encrypted_password",                 default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-  end
-
-  add_index "customer", ["email"], name: "index_customer_on_email", unique: true, using: :btree
-  add_index "customer", ["price_customer_id"], name: "index_customer_on_price_customer_id", using: :btree
-  add_index "customer", ["reset_password_token"], name: "index_customer_on_reset_password_token", unique: true, using: :btree
+  add_index "outgoing", ["at", "admin_id"], name: "idx_at_admin_on_call", using: :btree
+  add_index "outgoing", ["at", "customer_id"], name: "idx_at_customer_on_call", using: :btree
+  add_index "outgoing", ["campaign_id"], name: "index_outgoing_on_campaign_id", using: :btree
+  add_index "outgoing", ["contact_id"], name: "index_outgoing_on_contact_id", using: :btree
+  add_index "outgoing", ["list_id"], name: "index_outgoing_on_list_id", using: :btree
 
   create_table "price_customer", force: true do |t|
     t.text    "name"
@@ -128,12 +169,6 @@ ActiveRecord::Schema.define(version: 20141014020434) do
     t.integer "protocol_id"
   end
 
-  create_table "provider_codec", force: true do |t|
-    t.integer "provider_id"
-    t.integer "codec_id"
-    t.integer "priority"
-  end
-
   create_table "rate", force: true do |t|
     t.integer "provider_id"
     t.integer "route_id"
@@ -152,7 +187,32 @@ ActiveRecord::Schema.define(version: 20141014020434) do
     t.text    "name"
     t.integer "admin_id"
     t.float   "price_list"
+    t.integer "telco_id"
   end
+
+  add_index "route", ["prefix", "telco_id"], name: "index_route_on_prefix_and_telco_id", unique: true, using: :btree
+
+  create_table "sms_queue", force: true do |t|
+    t.integer  "contact_id"
+    t.integer  "campaign_id"
+    t.datetime "process"
+    t.datetime "discard"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sms_queue", ["campaign_id"], name: "index_sms_queue_on_campaign_id", using: :btree
+  add_index "sms_queue", ["contact_id"], name: "index_sms_queue_on_contact_id", using: :btree
+
+  create_table "tmp_contact_list", force: true do |t|
+    t.text     "key"
+    t.json     "content"
+    t.integer  "list_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tmp_contact_list", ["list_id"], name: "index_tmp_contact_list_on_list_id", using: :btree
 
   create_table "type_customer", force: true do |t|
     t.text    "name"

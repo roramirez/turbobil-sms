@@ -20,7 +20,6 @@
           <li>
             <a href="<%= url_for(customer_profile_path) %>"><i class="fa fa-user fa-fw"></i> User Profile</a>
           </li>
-         <li class="divider"></li>
           <li>
             <%= link_to '<i class="fa fa-sign-out fa-fw"></i>Logout'.html_safe, destroy_customer_session_path, :method => :delete %>
           </li>

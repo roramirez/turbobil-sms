@@ -10,13 +10,29 @@ Rails.application.routes.draw do
   devise_for :admins, ActiveAdmin::Devise.config.merge({path: '/admins'})
   ActiveAdmin.routes(self)
 
-  get  'customer/calls'  => 'customer#calls'
-  get  'customer/accounts'  => 'customer#accounts'
   get  'customer/prices'  => 'customer#prices'
-  devise_for :customers, :path => '/customer', controllers: { sessions: :sessions }
-  get "/customer" => "customer#dashboard"
-  get "/customer/account/:id" => "customer#edit_account", as: 'account'
-  post "/customer/account" => "customer#update_account"
+
+  devise_for :customers, :path => '/customer', controllers: { registrations: :registrations , passwords: :passwords, sessions: :sessions, confirmations: :confirmations }
+
+  get "/customer" => "campaigns#index"
   get '/customer/profile' =>  'customer#profile', as: :customer_profile
   post '/customer/profile' =>  'customer#update_profile', as: :customer_update_profile
+
+
+  resources :campaigns, path: "/customer/campaigns"
+  resources :lists, path: "/customer/lists" do
+    resources :contacts
+
+    member do
+      get 'import'
+      post 'import_map'
+      post 'upload'
+    end
+
+    resources :column_lists
+  end
+
+  resources :outgoings, path: "/customer/outgoings", only: [:index, :show]
+
 end
+

@@ -1,0 +1,97 @@
+<%= simple_form_for(@campaign) do |f| %>
+  <% if @campaign.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@campaign.errors.count, "error") %> prohibited this campaign from being saved:</h2>
+
+      <ul>
+      <% @campaign.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row col-lg-10">
+
+    <%= f.hidden_field :id %>
+    <div class="form-group col-sm-8">
+      <label>Name</label>
+      <%= f.text_field :name, autofocus: true, class: 'form-control', as: 'string' %>
+    </div>
+
+
+    <div class="form-group col-sm-3">
+      <label>Init</label>
+      <%= f.text_field :init, autofocus: true, class: 'datetimepicker form-control input-sm', as: 'datetime' %>
+    </div>
+
+    <div class="form-group col-sm-1">
+      <label>Active</label>
+      <%= check_box 'campaign', 'status', {}, '1', '0' %>
+    </div>
+
+  </div>
+
+  <div class="row col-lg-10">
+
+    <div class="form-group col-sm-8">
+      <label>Text</label>
+      <%= f.input_field :text, autofocus: true, class: 'form-control', as: 'text' %>
+    </div>
+
+    <div class="form-group col-sm-4">
+      <label>List</label>
+      <%= f.input_field :list_id,
+                        :collection => current_customer.lists,
+                        :class => 'form-control',
+                        :required => true,
+                        :as => 'select' %>
+     </div>
+  </div>
+
+  <div class="row col-sm-10">
+    <div class="pull-right">
+      <%= link_to 'Back', campaigns_path, class: "btn btn-default" %>
+      <%= f.button :submit, class: "form-submit" %>
+    <div>
+  </div
+
+<% end %>
+
+<script src="/assets/jquery.textcomplete.min.js?body=1"></script>
+<script>
+
+  var columns = '';
+
+  $('#campaign_list_id').on('change', function (e) {
+    var campaign_id = $('#campaign_id').val();
+    var value = $(this).val();
+
+    var req = $.ajax({
+      type: 'GET',
+      url: '/customer/lists/'  + value + '/column_lists.json',
+    });
+    req.done(function(data){
+      columns = data;
+      words = [] 
+      $.each(columns, function (i, column) {
+       words.push(column.name)
+      });
+    });
+
+  }).change();
+
+  $('#campaign_text').textcomplete([{
+    match: /(^|\s)(\w{2,})$/,
+    search: function (term, callback) {
+      callback($.map(words, function (word) {
+        return word.indexOf(term) === 0 ? word : null;
+      }));
+    },
+    replace: function (word) {
+      return '$1:' + word + ': ';
+    }
+  }]);
+
+
+</script>

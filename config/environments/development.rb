@@ -16,6 +16,9 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
+  # url
+  config.action_mailer.default_url_options = { :host => '192.168.33.10:3000' }
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -36,5 +39,5 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   #http://stackoverflow.com/a/18463187
-  config.reload_classes_only_on_change = false
+  #config.reload_classes_only_on_change = false
 end

@@ -1,2 +1,2 @@
-sip:
-  name: SIP
+twilio:
+  name: TWILIO
