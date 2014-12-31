@@ -36,7 +36,7 @@ Rails.application.routes.draw do
 
   # pages
   get 'pages/home'
-  get 'pages/help'
+  get 'pages/about'
   root to: 'pages#home'
 end
 
