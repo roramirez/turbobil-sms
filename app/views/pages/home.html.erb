@@ -1,2 +1,100 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+  <!--start: Wrapper-->
+  <div id="wrapper">
+    <!--start: Container -->
+      <div class="container">
+
+      <!-- start: Slider -->
+      <div class="slider-wrapper">
+
+        <div id="da-slider" class="da-slider">
+          <div class="da-slide">
+            <h2>To everywhere</h2>
+            <p>Send SMS to many countries around the world</p>
+             <% if current_customer.present?  %>
+             <a href=" <%= url_for(campaigns_path) %>" class="da-link">My account</a>
+             <% else %>
+             <a href=" <%= url_for(new_customer_registration_path) %>" class="da-link">Sign Up</a>
+             <% end %>
+            <div class="da-img" style="margin-left: -150px"><img src="/assets/parallax-slider/mapa.png" alt="image03" /></div>
+          </div>
+
+          <nav class="da-arrows">
+            <span class="da-arrows-prev"></span>
+            <span class="da-arrows-next"></span>
+          </nav>
+        </div>
+
+      </div>
+      <!-- end: Slider -->
+
+      <hr class="clean">
+
+      <!-- start: Row -->
+      <div class="row">
+        <div class="span3">
+          <div class="box">
+            <i class="fa-icon-bullhorn"></i>
+            <h3>Campaigns</h3>
+            <p>
+              Create campaign with multiple phones and scheduler your send
+            </p>
+            <div class="clear"></div>
+          </div>
+        </div>
+        <div class="span3">
+          <div class="box">
+            <i class="fa-icon-thumbs-up"></i>
+            <h3>Easy</h3>
+            <p>
+              Trackeable, fast and immediately read. Best way to contact with your customers, audiences and users.
+            </p>
+            <div class="clear"></div>
+          </div>
+        </div>
+
+        <div class="span3">
+          <div class="box">
+            <i class="fa-icon-comments-alt"></i>
+            <h3>Personalization</h3>
+            <p>
+              Customizable text for your senders with multiples values
+            </p>
+            <div class="clear"></div>
+          </div>
+        </div>
+
+        <div class="span3">
+          <div class="box">
+            <i class="fa-icon-list"></i>
+            <h3>List</h3>
+            <p>
+              Management multi list of subscribers
+            </p>
+            <div class="clear"></div>
+          </div>
+        </div>
+
+      </div>
+      <!-- end: Row -->
+
+      <hr class="clean">
+
+
+      <!-- start: Row -->
+      <div class="row">
+
+        <div class="span12">
+          <div class="contact">If You like our works and You want individual offer, please contact with Us.<i class="ico-envelope ico-white"></i>contact@boxtub.com
+          </div>
+        </div>
+
+      </div>
+      <!-- end: Row -->
+
+      <hr class="clean">
+
+    </div>
+    <!--end: Container-->
+
+  </div>
+  <!-- end: Wrapper  -->
