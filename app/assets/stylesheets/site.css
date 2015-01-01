@@ -1,0 +1,19 @@
+//= require bootstrap.css
+//= require bootstrap-responsive.css
+//= require style.css
+//= require parallax-slider.css
+//= require font-awesome
+
+
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}

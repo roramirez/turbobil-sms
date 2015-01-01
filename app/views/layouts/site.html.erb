@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BoxTub </title>
+  <%= stylesheet_link_tag    'site', media: 'all', 'data-turbolinks-track' => true %>
+
+  <!-- start: Mobile Specific -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- end: Mobile Specific -->
+
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Boogaloo">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Economica:700,400italic">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <!--start: Header -->
+  <header>
+    <!--start: Container -->
+    <div class="container">
+      <!--start: Row -->
+      <div class="row">
+        <!--start: Logo -->
+        <div class="logo span3">
+          <a class="brand" href="#">Box<span>Tub</span></a>
+        </div>
+        <!--end: Logo -->
+        <%= render "layouts/menu" %>
+      </div>
+      <!--end: Row -->
+    </div>
+    <!--end: Container-->
+  </header>
+  <!--end: Header-->
+
+  <%= yield %>
+
+  <%= render "layouts/footer" %>
+
+  <%= javascript_include_tag 'site', 'data-turbolinks-track' => true %>
+</body>
+</html>

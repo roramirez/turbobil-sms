@@ -34,5 +34,9 @@ Rails.application.routes.draw do
 
   resources :outgoings, path: "/customer/outgoings", only: [:index, :show]
 
+  # pages
+  get 'pages/home'
+  get 'pages/about'
+  root to: 'pages#home'
 end
 
