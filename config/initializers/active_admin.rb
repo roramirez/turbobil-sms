@@ -1,6 +1,6 @@
 ActiveAdmin.setup do |config|
 
-  config.site_title = "Turbobil"
+  config.site_title = "BoxTub"
 
   config.allow_comments = false
   config.batch_actions = false
