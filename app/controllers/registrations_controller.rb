@@ -17,8 +17,8 @@ class RegistrationsController < Devise::RegistrationsController
     #init value new customer
     admin = Admin.first
     self.resource.type_pay = 1
-    self.resource.admin = admi
-    self.resource.price_customer = admin.price_customer
+    self.resource.admin = admin
+    self.resource.price_customer_id = admin.default_price_customer_id
     self.resource.credit = 0
     self.resource
   end
