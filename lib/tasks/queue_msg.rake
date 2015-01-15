@@ -8,10 +8,10 @@ task :queue_msg => :environment do
 
   # get messages awaiting
   queue = campaign.get_sms_pending
-  columns_hash = campaign.list.columns_hash
   queue.each do | contact |
     # check customer credit
     if customer.enabled
+      columns_hash = campaign.list.columns_hash
       sms = contact.convert_message_text(campaign.text, columns_hash)
 
       routes = customer.rates(contact.number)
