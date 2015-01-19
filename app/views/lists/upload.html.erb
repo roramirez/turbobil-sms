@@ -104,7 +104,14 @@
     $("select[id^=sel_col] option[value=" + status.id + "]").attr('disabled','disabled');
     $('#sel_col_' + id ).val(status.id)
     addColumn(id, status.id);
-    $(this).find('option:selected').removeAttr('disabled');  
+    $(this).find('option:selected').removeAttr('disabled');
+  });
+
+  //show error when not can create column
+  $('.new_column_list').bind('ajax:error', function(data, status, xhr){
+    var id = $(this).data('id');
+    alert(status.responseJSON.name.toString());
+    $('#newcol-' + id ).focus();
   });
 
   $("span[id*=f_newcol]").hide();
