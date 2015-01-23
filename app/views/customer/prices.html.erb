@@ -21,7 +21,7 @@
             <tr class="odd gradeX">
               <td><%= p.prefix %></td>
               <td><%= p.route_name %></td>
-              <td><%= p.final_price_for_route(p.route_id, p.price_list) %></tr>
+              <td><%= number_to_currency(p.final_price_for_route(p.route_id, p.price_list), precision: 4) %></tr>
             <% end %>
            </tbody>
         </table>
