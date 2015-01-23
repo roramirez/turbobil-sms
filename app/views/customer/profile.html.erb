@@ -28,6 +28,15 @@
                 <%= f.password_field :password, autofocus: true, class: 'form-control', as: 'password',  placeholder: "Enter new password if you change" %>
               </div>
 
+              <div class="form-group">
+                <%= f.label :language %>
+                <%= f.input_field :language,
+                        :collection => [['English', 'en'],['Español', 'es']],
+                        :class => 'form-control',
+                        :required => true,
+                        :as => 'select' %>
+              </div>
+
               <%= f.submit "Update", class: 'btn btn-default' %>
             <% end %>
           </div>
