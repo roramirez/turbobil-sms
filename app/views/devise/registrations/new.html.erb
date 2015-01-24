@@ -28,6 +28,7 @@
                         :class => 'form-control',
                         :required => true,
                         :include_blank => "Language ...",
+                        :selected => resource.language ||= I18n.locale,
                         :as => 'select' %>
               </div>
               <%= f.button :submit, "Sign Up", class: 'btn btn-lg btn-create btn-block' %>
