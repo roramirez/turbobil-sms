@@ -12,7 +12,7 @@
           <li class="<%= 'active' if current_page?(pages_home_path) %>"><a href="<%= url_for :controller => 'pages', :action => 'home' %>"><%= I18n.t('views.pages.home') %></a></li>
 
           <% if current_customer.present?  %>
-          <li class=""><a href="<%= url_for :controller => 'campaigns', :action => 'list' %>"><%= I18n.t('views.pages.my_account') %></a></li>
+          <li class=""><a href="<%= url_for :controller => 'campaigns', :action => 'index' %>"><%= I18n.t('views.pages.my_account') %></a></li>
           <% else %>
           <li class=""><a href="<%= url_for :controller => 'registrations', :action => 'new' %>"><%= I18n.t('views.pages.sign_up') %></a></li>
           <li class=""><a href="<%= url_for :controller => 'sessions', :action => 'new' %>"><%= I18n.t('views.pages.sign_in') %></a></li>
