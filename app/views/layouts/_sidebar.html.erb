@@ -6,21 +6,21 @@
       <img src="<%= avatar_icon(current_customer.email) %>" />
       <h2><%= current_customer.name %></h2>
       <h3><%= current_customer.email %></h3>
-      <h3 class="text-center"><b>Credit:</b> <%= current_customer.credit %></h3>
+      <h3 class="text-center"><b><%= I18n.t('views.pages.credit') %>:</b> <%= current_customer.credit %></h3>
     </div>
 
     <ul class="nav" id="side-menu">
       <li>
-        <a class="<%= 'active' if current_page?(campaigns_path) %>" href="<%= url_for :controller => 'campaigns', :action => 'index' %>"><i class="fa fa-bullhorn fa-fw"></i>Campaigns</a>
+        <a class="<%= 'active' if current_page?(campaigns_path) %>" href="<%= url_for :controller => 'campaigns', :action => 'index' %>"><i class="fa fa-bullhorn fa-fw"></i><%= I18n.t('views.pages.campaigns') %></a>
       </li>
       <li>
-        <a class="<%= 'active' if current_page?(lists_path) %>" href="<%= url_for :controller => 'lists', :action => 'index' %>"><i class="fa fa-list fa-fw"></i>Lists</a>
+        <a class="<%= 'active' if current_page?(lists_path) %>" href="<%= url_for :controller => 'lists', :action => 'index' %>"><i class="fa fa-list fa-fw"></i><%= I18n.t('views.pages.lists') %></a>
       </li>
       <li>
-        <a class="<%= 'active' if current_page?(outgoings_path) %>" href="<%= url_for :controller => 'outgoings', :action => 'index' %>"><i class="fa fa-send fa-fw"></i>Outgoings</a>
+        <a class="<%= 'active' if current_page?(outgoings_path) %>" href="<%= url_for :controller => 'outgoings', :action => 'index' %>"><i class="fa fa-send fa-fw"></i><%= I18n.t('views.pages.outgoings') %></a>
       </li>
       <li>
-        <a class="<%= 'active' if current_page?(customer_prices_path) %>" href="<%= url_for :controller => 'customer', :action => 'prices' %>"><i class="fa fa-usd fa-fw"></i>Prices</a>
+        <a class="<%= 'active' if current_page?(customer_prices_path) %>" href="<%= url_for :controller => 'customer', :action => 'prices' %>"><i class="fa fa-usd fa-fw"></i><%= I18n.t('views.pages.prices') %></a>
       </li>
     </ul>
   </div>

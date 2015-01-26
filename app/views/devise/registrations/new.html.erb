@@ -3,7 +3,7 @@
     <div class="col-md-4 col-md-offset-4">
       <div class="login-panel panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Sign Up</h3>
+          <h3 class="panel-title"><%= I18n.t('views.pages.sign_up') %></h3>
         </div>
         <div class="panel-body">
           <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -11,27 +11,27 @@
 
             <fieldset>
               <div class="form-group">
-                <%= f.text_field :name, class: "form-control", placeholder: "Name", required: true, autofocus: true %>
+                <%= f.text_field :name, class: "form-control", placeholder: I18n.t('views.pages.name'), required: true, autofocus: true %>
               </div>
               <div class="form-group">
-                <%= f.input_field :email, required: true, :pattern => ".*", placeholder: 'E-mail', class: 'form-control' %>
+                <%= f.input_field :email, required: true, :pattern => ".*", placeholder: I18n.t('views.pages.email'), class: 'form-control' %>
               </div>
               <div class="form-group">
-                <%= f.input_field :password, required: true, placeholder: 'Password', class: 'form-control' %>
+                <%= f.input_field :password, required: true, placeholder: I18n.t('views.pages.password'), class: 'form-control' %>
               </div>
               <div class="form-group">
-                <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirm password", required: true %>
+                <%= f.password_field :password_confirmation, class: "form-control", placeholder: I18n.t('views.pages.password_confirmation'), required: true %>
               </div>
               <div class="form-group">
                 <%= f.input_field :language,
                         :collection => [['English', 'en'],['Español', 'es']],
                         :class => 'form-control',
                         :required => true,
-                        :include_blank => "Language ...",
+                        :include_blank => I18n.t('language_select'),
                         :selected => resource.language ||= I18n.locale,
                         :as => 'select' %>
               </div>
-              <%= f.button :submit, "Sign Up", class: 'btn btn-lg btn-create btn-block' %>
+              <%= f.button :submit, I18n.t('views.pages.sign_up'), class: 'btn btn-lg btn-create btn-block' %>
             </fieldset>
             <%= render "devise/shared/links" %>
           <% end %>

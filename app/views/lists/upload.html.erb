@@ -3,7 +3,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Adding data to list ...</h4>
+        <h4 class="modal-title"><%= I18n.t('views.pages.adding_data_loading') %> ...</h4>
       </div>
       <div class="modal-body">
          <div  id="loader" class="row text-center"><img src="/images/loader.gif"></div>
@@ -14,10 +14,10 @@
 <div class="row">
   <div class="col-lg-12">
      <h1 class="page-header">
-       Import Contacts Lists
+       <%= I18n.t('views.pages.upload_to') %>
        <div class="pull-right">
         <button type="button" name="my-status" class="btn btn-default import-data">
-          Add to List
+          <%= I18n.t('views.buttons.add_to_list') %>
         </button>
        </div>
      </h1>
@@ -34,19 +34,19 @@
               <th>
                 <span id="f_newcol-<%= i %>">
                   <div class="form-group">
-                    <label>New Column Name</label>
+                    <label><%= I18n.t('views.pages.new_column_name') %></label>
                     <%= form_for [@list, ColumnList.new] , format: :json ,remote: true , html: {'data-id' => i}  do |f| %>
                       <input id="newcol-<%= i %>" class="form-control" value="" maxlength="50" type="text" name="column_list[name]">
-                      <input id="submit-newcol-<%= i %>" class="btn btn-default" name="submit-newcol-<%= i%>" type="submit" value="Save">
-                      <input id="discard-newcol-<%= i %>" class="btn btn-default" name="discard-newcol-<%= i%>" data-id="<%= i %>" type="button" value="Discard">
+                      <input id="submit-newcol-<%= i %>" class="btn btn-default" name="submit-newcol-<%= i%>" type="submit" value="<%= I18n.t('views.buttons.save') %>">
+                      <input id="discard-newcol-<%= i %>" class="btn btn-default" name="discard-newcol-<%= i%>" data-id="<%= i %>" type="button" value="<%= I18n.t('views.buttons.discard') %>">
                     <% end %>
                   </div>
                 </span>
                 <div class="form-group">
                 <select id="sel_col_<%= i %>" class="form-control" data-id="<%= i %>" >
-                  <option value="0" selected="selected">Select option</option>
-                  <option value="new">New column</option>
-                  <optgroup label="Available Column Names">
+                  <option value="0" selected="selected"><%= I18n.t('views.pages.select_option') %></option>
+                  <option value="new"><%= I18n.t('views.pages.new_column') %></option>
+                  <optgroup label="<%= I18n.t('views.pages.available_column_names') %>">
                   <% @list.column_list.each do |col| %>
                   <option value="<%= col.id %>"><%= col.name %></option>
                   <% end %>

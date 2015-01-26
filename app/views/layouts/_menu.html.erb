@@ -9,13 +9,20 @@
       </a>
       <div class="nav-collapse collapse">
         <ul class="nav">
-          <li class="<%= 'active' if current_page?(pages_home_path) %>"><a href="<%= url_for :controller => 'pages', :action => 'home' %>">Home</a></li>
+          <li class="<%= 'active' if current_page?(pages_home_path) %>"><a href="<%= url_for :controller => 'pages', :action => 'home' %>"><%= I18n.t('views.pages.home') %></a></li>
 
           <% if current_customer.present?  %>
-          <li class=""><a href="<%= url_for :controller => 'campaigns', :action => 'list' %>">My Account</a></li>
+          <li class=""><a href="<%= url_for :controller => 'campaigns', :action => 'list' %>"><%= I18n.t('views.pages.my_account') %></a></li>
           <% else %>
-          <li class=""><a href="<%= url_for :controller => 'registrations', :action => 'new' %>">Sign Up</a></li>
-          <li class=""><a href="<%= url_for :controller => 'sessions', :action => 'new' %>">Sing In</a></li>
+          <li class=""><a href="<%= url_for :controller => 'registrations', :action => 'new' %>"><%= I18n.t('views.pages.sign_up') %></a></li>
+          <li class=""><a href="<%= url_for :controller => 'sessions', :action => 'new' %>"><%= I18n.t('views.pages.sign_in') %></a></li>
+
+          <li>
+            <%= form_tag change_language_path, :class => 'locale' do %>
+              <%= select_tag 'set_locale', options_for_select( [['English', 'en'],['Español', 'es']], I18n.locale.to_s), :onchange => 'this.form.submit()' %>
+            <% end %>
+          </li>
+
           <% end%>
         </ul>
       </div>
