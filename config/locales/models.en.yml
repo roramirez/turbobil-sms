@@ -1,0 +1,26 @@
+en:
+  activerecord:
+    models:
+      list: List
+      campaign: Campaign
+    attributes:
+      list:
+        name: Name
+      campaign:
+        name: Name
+        init: Init
+        active: Active
+        text: Text
+        list: List
+        status: Status
+      outgoing:
+        at: At
+        route: Route
+        destination: Destination
+        status: Status
+        cost: Price
+        campaign: Campaign
+      price:
+        prefix: Prefix
+        route: Route
+        price: Price

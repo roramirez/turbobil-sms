@@ -35,8 +35,12 @@ Rails.application.routes.draw do
   resources :outgoings, path: "/customer/outgoings", only: [:index, :show]
 
   # pages
-  get 'pages/home'
-  get 'pages/about'
-  root to: 'pages#home'
+  scope "(:locale)", :locale => /en|es/ do
+    root :to => 'pages#home'
+    get "pages/home"
+    get 'pages/about'
+  end
+  post 'change_language' =>  'pages#change_language', as: :change_language
+
 end
 

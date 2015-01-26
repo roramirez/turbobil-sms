@@ -15,18 +15,18 @@
 
     <%= f.hidden_field :id %>
     <div class="form-group col-sm-8">
-      <label>Name</label>
+      <label><%= I18n.t('activerecord.attributes.campaign.name') %></label>
       <%= f.text_field :name, autofocus: true, class: 'form-control', as: 'string' %>
     </div>
 
 
     <div class="form-group col-sm-3">
-      <label>Init</label>
+      <label><%= I18n.t('activerecord.attributes.campaign.init') %></label>
       <%= f.text_field :init, autofocus: true, class: 'datetimepicker form-control input-sm', as: 'datetime' %>
     </div>
 
     <div class="form-group col-sm-1">
-      <label>Active</label>
+      <label><%= I18n.t('activerecord.attributes.campaign.active') %></label>
       <%= check_box 'campaign', 'status', {}, '1', '0' %>
     </div>
 
@@ -35,12 +35,12 @@
   <div class="row col-lg-10">
 
     <div class="form-group col-sm-8">
-      <label>Text</label>
+      <label><%= I18n.t('activerecord.attributes.campaign.text') %></label>
       <%= f.input_field :text, autofocus: true, class: 'form-control', as: 'text' %>
     </div>
 
     <div class="form-group col-sm-4">
-      <label>List</label>
+      <label><%= I18n.t('activerecord.attributes.campaign.list') %></label>
       <%= f.input_field :list_id,
                         :collection => current_customer.lists,
                         :class => 'form-control',
@@ -51,7 +51,7 @@
 
   <div class="row col-sm-10">
     <div class="pull-right">
-      <%= link_to 'Back', campaigns_path, class: "btn btn-default" %>
+      <%= link_to I18n.t('views.buttons.back'), campaigns_path, class: "btn btn-default" %>
       <%= f.button :submit, class: "form-submit" %>
     <div>
   </div

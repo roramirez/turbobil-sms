@@ -1,0 +1,100 @@
+  <!--start: Wrapper-->
+  <div id="wrapper">
+    <!--start: Container -->
+      <div class="container">
+
+      <!-- start: Slider -->
+      <div class="slider-wrapper">
+
+        <div id="da-slider" class="da-slider">
+          <div class="da-slide">
+            <h2>A todas partes</h2>
+            <p>Envía SMS a todas partes</p>
+             <% if current_customer.present?  %>
+             <a href=" <%= url_for(campaigns_path) %>" class="da-link">Mi cuenta</a>
+             <% else %>
+             <a href=" <%= url_for(new_customer_registration_path) %>" class="da-link">Inscríbete</a>
+             <% end %>
+            <div class="da-img" style="margin-left: -150px"><img src="/assets/parallax-slider/mapa.png" alt="image03" /></div>
+          </div>
+
+          <nav class="da-arrows">
+            <span class="da-arrows-prev"></span>
+            <span class="da-arrows-next"></span>
+          </nav>
+        </div>
+
+      </div>
+      <!-- end: Slider -->
+
+      <hr class="clean">
+
+      <!-- start: Row -->
+      <div class="row">
+        <div class="span3">
+          <div class="box">
+            <i class="fa-icon-bullhorn"></i>
+            <h3>Campañas</h3>
+            <p>
+              Crea de manera fácil multiples campañas para enviar SMSs a multiples celular y programa dicho envío
+            </p>
+            <div class="clear"></div>
+          </div>
+        </div>
+        <div class="span3">
+          <div class="box">
+            <i class="fa-icon-thumbs-up"></i>
+            <h3>Fácil</h3>
+            <p>
+              Fácil de usar, rápido y con seguimiento. La mejor forma de estar en contacto con tus clientes, audiciecia y usuarios.
+            </p>
+            <div class="clear"></div>
+          </div>
+        </div>
+
+        <div class="span3">
+          <div class="box">
+            <i class="fa-icon-comments-alt"></i>
+            <h3>Personalizable</h3>
+            <p>
+              Permite personalizar las mensajes a enviar
+            </p>
+            <div class="clear"></div>
+          </div>
+        </div>
+
+        <div class="span3">
+          <div class="box">
+            <i class="fa-icon-list"></i>
+            <h3>Segmentados</h3>
+            <p>
+              Control y manejo de lista de usuarios.
+            </p>
+            <div class="clear"></div>
+          </div>
+        </div>
+
+      </div>
+      <!-- end: Row -->
+
+      <hr class="clean">
+
+
+      <!-- start: Row -->
+      <div class="row">
+
+        <div class="span12">
+          <div class="contact">Si te quieres contactar con nosotros, escribenos a <i class="ico-envelope ico-white"></i>contact@boxtub.com
+          </div>
+        </div>
+
+      </div>
+      <!-- end: Row -->
+
+      <hr class="clean">
+
+    </div>
+    <!--end: Container-->
+
+  </div>
+  <!-- end: Wrapper  -->
