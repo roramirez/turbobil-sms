@@ -1,0 +1,48 @@
+es:
+  views:
+    pages:
+      sign_in: Ingresar
+      sign_up: Inscribirse
+      home: Inicio
+      my_account: Mi Cuenta
+      please_sing_in: Inicia sesión
+      forgot_password: ¿Se te olvidó el password?
+      dont_receive_instruccion: ¿No has recibido las instrucciones de confirmación?
+      resend_confirmation_instruccion: Reenviar instrucciones de confirmación
+      campaigns: Campañas
+      lists: Listas
+      outgoings: Envíos
+      prices: Precios
+      new_campaign: Nueva campaña
+      editing_campaign: Editando campaña
+      new_list: Nueva Lista
+      editing_list: Editando lista
+      upload_to: Agregar contactos a lista
+      adding_data_loading: Agregando datos a lista
+      new_column_name: Nombre nueva columna
+      select_option: Selecciona una opcion
+      new_column: Nueva columna
+      available_column_names: Columnas disponibles
+      contact_list: Contactos Lista
+      credit: Saldo
+      name: Nombre
+      email: Correo electrónico
+      password: Contraseña
+      password_confirmation: Confirmación de contraseña
+      language_select: Idioma ...
+      enter_new_password: Ingrese nueva contraseña si la desea cambiar
+      edit_profile: Editar perfil
+    buttons:
+      new_campaign: Nueva campaña
+      edit: Editar
+      show_outgoings: Ver SMS enviados
+      new_list: Nueva lista
+      add_to_list: Agrega a la lista
+      import: Importar
+      operation: Operación
+      back: Atrás
+      filter: Filtrar
+      save: Guardar
+      update: Actualizar
+      discard: Cancelar
+      import_contact: Importar contactos

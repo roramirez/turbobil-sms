@@ -2,9 +2,9 @@
 <div class="row">
   <div class="col-lg-12">
      <h1 class="page-header">
-       Campaigns
+       <%= I18n.t('views.pages.campaigns') %>
        <div class="pull-right">
-        <%= link_to 'New Campaign', new_campaign_path, class: 'btn btn-default' %>
+        <%= link_to I18n.t('views.buttons.new_campaign'), new_campaign_path, class: 'btn btn-default' %>
         </div>
      </h1>
   </div>
@@ -20,11 +20,11 @@
           <thead>
 
             <tr role="row">
-              <th><%=  link_to_sorted "Name", :name %></th>
-              <th><%=  link_to_sorted "Status", :status %></th>
-              <th><%=  link_to_sorted "Init", :init %></th>
-              <th><%=  link_to_sorted "List", :list_id %></th>
-              <th><%=  "Operation"  %></th>
+              <th><%=  link_to_sorted I18n.t('activerecord.attributes.campaign.name') , :name %></th>
+              <th><%=  link_to_sorted I18n.t('activerecord.attributes.campaign.status') , :status %></th>
+              <th><%=  link_to_sorted I18n.t('activerecord.attributes.campaign.init') , :init %></th>
+              <th><%=  link_to_sorted I18n.t('activerecord.attributes.campaign.list') , :list_id %></th>
+              <th><%=  I18n.t('views.buttons.operation') %></th>
             </tr>
           </thead>
 
@@ -41,8 +41,8 @@
               <td><%= campaign.init %></td>
               <td><%= campaign.list %></td>
               <td>
-                <%= link_to 'Edit', edit_campaign_path(campaign) %>
-                <%= link_to "Show outgoing SMSs", outgoings_path(:campaign => campaign.id) %>
+                <%= link_to I18n.t('views.buttons.edit') , edit_campaign_path(campaign) %>
+                <%= link_to I18n.t('views.buttons.show_outgoings'), outgoings_path(:campaign => campaign.id) %>
 
 
               </td>

@@ -1,0 +1,30 @@
+es:
+  activerecord:
+    models:
+      list: Lista
+      campaign: Campaña
+      customer: Cliente
+    attributes:
+      list:
+        name: Nombre
+      campaign:
+        name: Nombre
+        init: Iniciar
+        active: Activa
+        text: Texto
+        list: Lista
+        status: Estado
+      outgoing:
+        at: Fecha
+        route: Ruta
+        destination: Destino
+        status: Estado
+        cost: Precio
+        campaign: Campaña
+      price:
+        prefix: Prefix
+        route: Ruta
+        price: Precio
+      customer:
+        password: Contraseña
+        language: Idioma
