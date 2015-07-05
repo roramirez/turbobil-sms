@@ -15,11 +15,9 @@ Now for this version Opensouce is available for to work with Twilio API. If you 
 
 For commercial support support@boxtub.com
 
-
 == Requirements
   * Ubuntu/Debian/CentOS/RHEL
-  * Ruby (MRI) 2.0 or 2.1
-  * Redis 2.0+
+  * Ruby 2.1.2+
   * MySQL or PostgreSQL
 
 == How contributing with a project
