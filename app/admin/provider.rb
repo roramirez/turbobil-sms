@@ -2,7 +2,7 @@ ActiveAdmin.register Provider do
 
   scope_to :current_admin
 
-  permit_params :name, :email, :balance,  :host, :username, :password
+  permit_params :name, :email, :balance,  :host, :username, :password, :protocol_id
 
   filter :type_customer
 
