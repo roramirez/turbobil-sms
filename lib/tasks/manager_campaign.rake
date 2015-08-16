@@ -6,6 +6,8 @@ task :manager_campaign => :environment do
   campaigns = Campaign.actives
 
   campaigns.each do |campaign|
+    # check if have sms pending for run
+    next if campaign.get_sms_pending.empty?
     # get customer with credit
     if campaign.customer.enabled
     # check run/stop
