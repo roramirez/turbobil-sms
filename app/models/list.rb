@@ -10,7 +10,7 @@ class List < ActiveRecord::Base
   belongs_to :customer
 
   def to_s
-    :name
+    name
   end
 
 
