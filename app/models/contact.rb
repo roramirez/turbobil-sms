@@ -19,6 +19,7 @@ class Contact < ActiveRecord::Base
       k = key_msg.upcase.gsub(':', '')
       if columns_hash[k]
         text = text.gsub(key_msg, columns_hash[k])
+        text = text.gsub(key_msg, columns_hash[k].to_s)
       end
     end
     I18n.transliterate(text)
