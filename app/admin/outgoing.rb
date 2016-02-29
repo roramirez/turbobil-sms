@@ -8,7 +8,7 @@ ActiveAdmin.register Outgoing, namespace: :admins do
   filter :provider, :collection => proc {Provider.where admin: current_admin }
   filter :route,  :collection => proc {Route.where admin: current_admin }
   #Please FIXME: This very ugly
-  filter :status, :as => :select,  collection: [ ["ANSWER", "ANSWER"], ["CHANUNAVAIL", "CHANUNAVAIL"], ["NOANSWER", "NOANSWER"], ["CONGESTION", "CONGESTION"], ["BUSY", "BUSY"], ["CANCEL", "CANCEL"]]
+  filter :status, :as => :select,  collection: [ ["delivered", "delivered"], ["queue", "queue"], ["FAILED", "Failed"]]
   filter :at
 
 
@@ -19,14 +19,10 @@ ActiveAdmin.register Outgoing, namespace: :admins do
       row :route
       row :destination
       row :customer
-      row :duration
-      row "Duration", :sorteable => :duration do |outgoing|
-        outgoing.duration_hhmmss
-      end
       row :cost
       row :price_for_customer
       row :status
-      row :ip
+      row :text
 
     end
   end
@@ -37,13 +33,9 @@ ActiveAdmin.register Outgoing, namespace: :admins do
     column :route
     column :destination
     column :customer
-    column "Duration", :sorteable => :duration do |outgoing|
-      outgoing.duration_hhmmss
-    end
     column :cost
     column :price_for_customer
     column :status
-    column :ip
     actions
   end
 
