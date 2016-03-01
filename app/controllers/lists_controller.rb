@@ -81,7 +81,7 @@ class ListsController < ApplicationController
   end
 
   def import_map
-    @temp_contacts = TmpContactList.get_by_key_and_list(params[:key], @list)
+    @temp_contacts = TmpContactList.get_by_key_and_list(params[:key], @list, nil)
     key_map = @list.column_list.key_map.id
     key_index = nil
     columns_map = params[:columns]
