@@ -27,4 +27,15 @@ class Outgoing < ActiveRecord::Base
     Time.at(seconds).utc.strftime("%H:%M:%S")
   end
 
+
+  def self.to_csv
+    columns = ["destination", "status", "text", "price", "campaign"]
+    CSV.generate do |csv|
+      csv << columns
+      all.each do |o|
+        csv << [o.destination, o.status, o.text, o.price_for_customer, o.campaign]
+      end
+    end
+  end
+
 end

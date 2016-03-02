@@ -11,6 +11,13 @@ class OutgoingsController < ApplicationController
                               .page(params[:page]).per(10)
                               .sorted(params[:sort])
                               .filter(params.slice(:campaign))
+
+
+    respond_to do |format|
+      format.html
+      format.csv { render text: current_customer.outgoings.filter(params.slice(:campaign)).to_csv }
+    end
+
   end
 
 

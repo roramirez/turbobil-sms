@@ -22,6 +22,11 @@
             </div>
             <button class="btn btn-primary btn-sm" type="submit"><%= I18n.t('views.buttons.filter') %></button>
           <% end %>
+
+          <%= simple_form_for :outgoing, :url => '/customer/outgoings.csv', :html => {:method => :get}  do |f| %>
+            <%= f.input :campaign, :as => :hidden, :input_html => { :value => params[:campaign], :name => 'campaign' } %>
+            <button class="btn btn-primary btn-sm" type="submit">Export</button>
+          <% end %>
        </div>
      </div>
 
