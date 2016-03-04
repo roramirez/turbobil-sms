@@ -4,7 +4,6 @@ task :manager_campaign => :environment do
   controller = ApplicationController.new
   # get actives campaign
   campaigns = Campaign.actives
-
   campaigns.each do |campaign|
     # check if have sms pending for run
     next if campaign.get_sms_pending.empty?
@@ -17,6 +16,8 @@ task :manager_campaign => :environment do
       else
         puts 'is running ' +  campaign.id.to_s
       end
+    else
+      puts 'customer not enabled ' + campaign.customer.name
     end
   end
 
