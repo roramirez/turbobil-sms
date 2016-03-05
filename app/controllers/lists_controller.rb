@@ -108,7 +108,13 @@ class ListsController < ApplicationController
 
       if number_int = GlobalPhone.parse(number)
         contact.number = number_int.international_string
-        exists = Contact.exist_number_on_list(contact.number.to_s, @list)
+
+        if params[:ignore_exist] == 'true'
+          exists = false
+        else
+          exists = Contact.exist_number_on_list(contact.number.to_s, @list)
+        end
+
         if exists == false
           contact.save
         end

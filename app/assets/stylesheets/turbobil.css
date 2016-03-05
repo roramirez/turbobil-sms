@@ -85,3 +85,7 @@ a.sorted {
     color: #468847;
     text-align: left;
  }
+
+#checkbox_ignore{
+    font-size: 12px;
+}

@@ -19,6 +19,9 @@
         <button type="button" name="my-status" class="btn btn-default import-data">
           <%= I18n.t('views.buttons.add_to_list') %>
         </button>
+        <div id="checkbox_ignore" class="pull-right">
+          <input type="checkbox" class="ignore_exist" name="ignore_exist" value="ignore_exist">Ignore repetead contacts
+        </div>
        </div>
      </h1>
   </div>
@@ -150,7 +153,8 @@
       type: 'POST',
       data: {
         'columns': columns_map,
-        'key': key
+        'key': key,
+        'ignore_exist': $("[name='ignore_exist']").is(":checked")
       }
     }).done(function (response, textStatus, xhr) {
       $('.import-data').prop('disabled','');
